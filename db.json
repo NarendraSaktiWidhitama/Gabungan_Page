@@ -1,0 +1,200 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "12345"
+    },
+    {
+      "id": "a10f",
+      "username": "Sakti",
+      "password": "asaasa22018!!"
+    },
+    {
+      "id": "beaa",
+      "username": "rintaro",
+      "password": "rintaro69!"
+    },
+    {
+      "id": "3277",
+      "username": "Sakti6",
+      "password": "sa123"
+    }
+  ],
+  "data": [
+    {
+      "id": "9bd9",
+      "nama": "Narendra sakti widhitama",
+      "email": "yurawa@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-11-12",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "a521",
+      "nama": "Darren sefhiros jacobson",
+      "email": "seft@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-11-12",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "d3ca",
+      "nama": "Adrean syahputra",
+      "email": "rean@gmail.com",
+      "jenis": "Uang Ujian",
+      "jumlah": 1000000,
+      "tanggal": "2025-11-12",
+      "status": false,
+      "level": "",
+      "kelas": ""
+    }
+  ],
+  "jenis": [
+    {
+      "nama": "SPP Bulanan",
+      "keterangan": "Bayar uang sekolah setiap bulan",
+      "id": "1",
+      "aktif": true
+    },
+    {
+      "nama": "Uang Ujian",
+      "keterangan": "Bayar uang buat mengikuti ujian apapun",
+      "id": "2",
+      "aktif": true
+    },
+    {
+      "nama": "Seragam Sekolah",
+      "keterangan": "Bayar buat pakaian seragam sekolah",
+      "id": "3",
+      "aktif": true
+    },
+    {
+      "nama": "Uang gedung",
+      "keterangan": "Bayar uang gedung setiap awal semester",
+      "id": "ee00",
+      "aktif": true
+    }
+  ],
+  "kategori": [
+    {
+      "id": "d323",
+      "nama": "Siswa",
+      "aktif": false
+    },
+    {
+      "id": "3e55",
+      "nama": "Guru",
+      "aktif": false
+    },
+    {
+      "id": "ca91",
+      "nama": "Karyawan"
+    }
+  ],
+  "masterdata": [
+    {
+      "id": "6086",
+      "nama": "Narendra sakti widhitama",
+      "email": "yurawa@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X TKJ"
+    },
+    {
+      "id": "210c",
+      "nama": "Arif riansyah",
+      "email": "asaasa@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru informatika"
+    },
+    {
+      "id": "c6d6",
+      "nama": "Darren sefhiros jacobson",
+      "email": "seft@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X TKJ"
+    },
+    {
+      "id": "01b4",
+      "nama": "Bibir gajah",
+      "email": "Bibirgajah@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "Bendahara kelas"
+    },
+    {
+      "id": "010f",
+      "nama": "Adrean syahputra",
+      "email": "rean@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X DKV"
+    }
+  ],
+  "kelas": [
+    {
+      "id": "e225",
+      "kelas": "X",
+      "jurusan": "TKJ"
+    },
+    {
+      "id": "ebf7",
+      "kelas": "X",
+      "jurusan": "AKL"
+    },
+    {
+      "id": "c9d1",
+      "kelas": "X",
+      "jurusan": "DKV"
+    },
+    {
+      "id": "0c5f",
+      "kelas": "X",
+      "jurusan": "RPL"
+    },
+    {
+      "id": "59c7",
+      "kelas": "XI",
+      "jurusan": "TKJ"
+    },
+    {
+      "id": "99bf",
+      "kelas": "XI",
+      "jurusan": "AKL"
+    },
+    {
+      "id": "0bc6",
+      "kelas": "XI",
+      "jurusan": "DKV"
+    },
+    {
+      "id": "192b",
+      "kelas": "XI",
+      "jurusan": "RPL"
+    },
+    {
+      "id": "f638",
+      "kelas": "XII",
+      "jurusan": "TKJ"
+    },
+    {
+      "id": "fcd3",
+      "kelas": "XII",
+      "jurusan": "AKL"
+    },
+    {
+      "id": "6491",
+      "kelas": "XII",
+      "jurusan": "DKV"
+    },
+    {
+      "id": "52e1",
+      "kelas": "XII",
+      "jurusan": "RPL"
+    }
+  ]
+}
