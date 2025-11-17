@@ -14,20 +14,25 @@ function Jenistagihan() {
   const [form, setForm] = useState({ nama: "", keterangan: "" });
 
   useEffect(() => {
-    const load = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get("http://localhost:5000/jenis");
-        setJenis(res.data);
+  const load = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get("http://localhost:5000/jenis");
+      setJenis(res.data);
+
+      setTimeout(() => {
         setLoading(false);
-        setTimeout(() => setContentVisible(true), 50);
-      } catch (err) {
-        console.error(err);
-        setLoading(false);
-      }
-    };
-    load();
-  }, []);
+
+        setTimeout(() => setContentVisible(true), 200);
+      }, 600);
+
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+    }
+  };
+  load();
+}, []);
 
   const handleSave = async () => {
     if (!form.nama.trim()) {

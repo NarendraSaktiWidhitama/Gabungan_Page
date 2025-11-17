@@ -18,7 +18,7 @@ function Tambahkategori() {
   });
 
   const [kelasList, setKelasList] = useState([]);
-  const [kategoriList, setKategoriList] = useState([]); // ✅ list kategori
+  const [kategoriList, setKategoriList] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,11 +31,10 @@ function Tambahkategori() {
       .then((res) => setKelasList(res.data))
       .catch((err) => console.error("Gagal mengambil kelas:", err));
 
-    // ✅ ambil kategori dari endpoint yang benar
     axios
       .get("http://localhost:5000/kategori")
       .then((res) => {
-        console.log("Data kategori dari backend:", res.data); // cek di console
+        console.log("Data kategori dari backend:", res.data);
         setKategoriList(res.data);
       })
       .catch((err) => console.error("Gagal mengambil kategori:", err));
@@ -81,7 +80,7 @@ function Tambahkategori() {
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-t-4 border-emerald-500"></div>
           <p className="mt-4 text-xl font-medium text-gray-700">
-            Memuat halaman...
+            Memuat halaman
           </p>
         </div>
       </div>
@@ -157,7 +156,7 @@ function Tambahkategori() {
                 name="jabatan"
                 value={form.jabatan}
                 onChange={handleChange}
-                placeholder="Jabatan (Guru / TU / Bendahara)"
+                placeholder="Jabatan"
                 className="w-full border px-4 py-2 rounded"
                 required
               />

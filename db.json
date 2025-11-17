@@ -54,6 +54,39 @@
       "status": false,
       "level": "",
       "kelas": ""
+    },
+    {
+      "id": "cd7f",
+      "nama": "Narendra sakti widhitama",
+      "email": "yurawa@gmail.com",
+      "jenis": "Alat praktek",
+      "jumlah": 1000000,
+      "tanggal": "2025-11-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "e245",
+      "nama": "Adrean syahputra",
+      "email": "rean@gmail.com",
+      "jenis": "Alat praktek",
+      "jumlah": 1000000,
+      "tanggal": "2025-11-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "a204",
+      "nama": "mia luna tearmoon",
+      "email": "luna@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-11-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
     }
   ],
   "jenis": [
@@ -79,6 +112,12 @@
       "nama": "Uang gedung",
       "keterangan": "Bayar uang gedung setiap awal semester",
       "id": "ee00",
+      "aktif": true
+    },
+    {
+      "nama": "Alat praktek",
+      "keterangan": "untuk praktek disetiap jurusannya",
+      "id": "fab7",
       "aktif": true
     }
   ],
@@ -133,6 +172,69 @@
       "email": "rean@gmail.com",
       "kategori": "Siswa",
       "jabatan": "X DKV"
+    },
+    {
+      "id": "529d",
+      "nama": "Bibir gajah",
+      "email": "asaasa@gmail.com",
+      "kategori": "security",
+      "jabatan": "Satpam"
+    },
+    {
+      "id": "2250",
+      "nama": "supatman saputra",
+      "email": "putra@gmail.com",
+      "kategori": "ustadz",
+      "jabatan": "Imam sholat jamaah"
+    },
+    {
+      "id": "9396",
+      "nama": "mia luna tearmoon",
+      "email": "luna@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X DKV"
+    },
+    {
+      "id": "f248",
+      "nama": "widhi saputra",
+      "email": "saput@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "XII DKV"
+    },
+    {
+      "id": "8edc",
+      "nama": "faza top tegar",
+      "email": "faza@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru matematika"
+    },
+    {
+      "id": "eb6a",
+      "nama": "faza top tegar",
+      "email": "faza@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "Bendahara"
+    },
+    {
+      "id": "6dfe",
+      "nama": "Darren sefhiros jacobson",
+      "email": "seft@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "Satpam"
+    },
+    {
+      "id": "cdfe",
+      "nama": "supatman saputra",
+      "email": "putra@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru bahasa indonesia"
+    },
+    {
+      "id": "cb77",
+      "nama": "Adrean syahputra",
+      "email": "yurawa@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "XI RPL"
     }
   ],
   "kelas": [

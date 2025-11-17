@@ -45,7 +45,7 @@ function Masterdata() {
 
   useEffect(() => {
     loadData();
-    loadKategori(); // <- panggil disini
+    loadKategori();
   }, []);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ function Masterdata() {
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-t-4 border-emerald-500"></div>
           <p className="mt-4 text-xl font-medium text-gray-700">
-            Memuat kategori data
+            Memuat master data
           </p>
         </div>
       </div>
@@ -101,15 +101,13 @@ function Masterdata() {
       <div className="flex-1 p-8 ml-56 transition-all">
         <div className="flex justify-between items-center bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow mb-6">
           <h1 className="text-2xl font-semibold flex items-center gap-2">
-            <i className="ri-folder-2-fill"></i> Master data
+            <i className="ri-database-2-fill"></i> Master data
           </h1>
         </div>
 
         <div className="flex justify-between items-center mb-4">
-          {/* Kiri: filter + search */}
           <div className="flex items-center gap-3">
             
-            {/* ✅ FILTER SEKARANG DINAMIS */}
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}

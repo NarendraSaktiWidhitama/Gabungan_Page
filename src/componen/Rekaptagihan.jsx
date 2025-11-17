@@ -6,6 +6,7 @@ function Rekaptagihan() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("harian");
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -16,7 +17,11 @@ function Rekaptagihan() {
       } catch (err) {
         console.error(err);
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+
+          setTimeout(() => setShowContent(true), 300);
+        }, 600);
       }
     };
     load();
@@ -44,10 +49,14 @@ function Rekaptagihan() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidnav />
-      <div className="flex-1 p-8 ml-56 overflow-x-auto">
-        <div className="bg-gradient-to-r from-emerald-300 to-emerald-400 p-4 rounded-lg mb-6">
+
+      <div
+        className={`flex-1 p-8 ml-56 overflow-x-auto transition-all duration-700 
+        ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+      >
+        <div className="bg-gradient-to-r from-emerald-300 to-emerald-400 p-4 rounded-lg mb-6 shadow-md">
           <div className="flex items-center gap-3">
-            <i class="ri-folder-history-fill text-3xl"></i>
+            <i className="ri-folder-history-fill text-3xl"></i>
             <h1 className="text-2xl font-bold">Rekap Data Tagihan</h1>
           </div>
         </div>
@@ -77,9 +86,13 @@ function Rekaptagihan() {
                 <th className="py-2 px-3 w-[110px]">Tanggal</th>
               </tr>
             </thead>
+
             <tbody>
               {filteredData.map((d, i) => (
-                <tr key={d.id} className="hover:bg-gray-50">
+                <tr
+                  key={d.id}
+                  className="hover:bg-gray-50 transition-all duration-500"
+                >
                   <td className="py-2 px-3 text-right">{i + 1}</td>
                   <td className="py-2 px-3 text-left">{d.nama}</td>
                   <td className="py-2 px-3 text-left">{d.email}</td>
@@ -90,6 +103,7 @@ function Rekaptagihan() {
                   </td>
                 </tr>
               ))}
+
               {data.length === 0 && (
                 <tr>
                   <td colSpan="8" className="p-6 text-gray-500 text-center">

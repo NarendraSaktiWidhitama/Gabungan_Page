@@ -1,23 +1,34 @@
+// Kelas dengan Loading + Animasi
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidnav from "../src/componen/Sidnav";
 import Swal from "sweetalert2";
-import gambar from "../public/Logo.png"
+import gambar from "../public/Logo.png";
 
 function Kelas() {
   const [kelasData, setKelasData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
-
   const [kelas, setKelas] = useState("");
   const [jurusan, setJurusan] = useState("");
 
   const daftarKelas = ["X", "XI", "XII"];
   const daftarJurusan = ["TKJ", "AKL", "DKV", "RPL"];
 
+  const [loading, setLoading] = useState(true); 
+const [showContent, setShowContent] = useState(false);
+
   const loadData = async () => {
-    const res = await axios.get("http://localhost:5000/kelas");
-    setKelasData(res.data.reverse());
+    try {
+      const res = await axios.get("http://localhost:5000/kelas");
+      setKelasData(res.data.reverse());
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+        setTimeout(() => setShowContent(true), 300);
+      }, 600);
+
+    }
   };
 
   useEffect(() => {
@@ -48,18 +59,10 @@ function Kelas() {
     }
 
     if (editId === null) {
-      // tambah
-      await axios.post("http://localhost:5000/kelas", {
-        kelas,
-        jurusan,
-      });
+      await axios.post("http://localhost:5000/kelas", { kelas, jurusan });
       Swal.fire("Berhasil", "Data kelas ditambahkan", "success");
     } else {
-      // edit
-      await axios.put(`http://localhost:5000/kelas/${editId}`, {
-        kelas,
-        jurusan,
-      });
+      await axios.put(`http://localhost:5000/kelas/${editId}`, { kelas, jurusan });
       Swal.fire("Berhasil", "Data kelas diupdate", "success");
     }
 
@@ -83,14 +86,28 @@ function Kelas() {
     Swal.fire("Terhapus", "Data berhasil dihapus", "success");
   };
 
+  const baseAnimation = showContent
+    ? "opacity-100 translate-y-0 transition-all duration-700 ease-out"
+    : "opacity-0 translate-y-4";
+
+  if (loading && !showContent)
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-t-4 border-emerald-500"></div>
+          <p className="mt-4 text-xl font-medium text-gray-700">Memuat Kelas</p>
+        </div>
+      </div>
+    );
+
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className={`flex min-h-screen bg-gray-100 ${baseAnimation}`}>      
       <Sidnav />
 
-      <div className="flex-1 p-8 ml-56">
-        <div className="flex justify-between items-center mb-6 bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow">
+      <div className={`flex-1 p-8 ml-56 ${baseAnimation}`}>        
+        <div className={`flex justify-between items-center mb-6 bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow ${baseAnimation}`}>          
           <h1 className="text-2xl font-semibold flex items-center gap-2">
-            <i className="ri-community-fill"></i> Data Kelas & Jurusan
+            <i className="ri-group-fill"></i> Data Kelas & Jurusan
           </h1>
           <button
             onClick={openTambah}
@@ -100,7 +117,7 @@ function Kelas() {
           </button>
         </div>
 
-        <div className="bg-white shadow rounded p-5">
+        <div className={`bg-white shadow rounded p-5 ${baseAnimation}`}>          
           <table className="w-full text-left border-collapse">
             <thead className="bg-emerald-300">
               <tr>
@@ -113,7 +130,7 @@ function Kelas() {
 
             <tbody>
               {kelasData.map((d, i) => (
-                <tr key={d.id} className="hover:bg-gray-50">
+                <tr key={d.id} className={`hover:bg-gray-50 transition-all duration-500 ${baseAnimation}`}>
                   <td className="p-2">{i + 1}</td>
                   <td className="p-2">{d.kelas}</td>
                   <td className="p-2">{d.jurusan}</td>
@@ -139,7 +156,7 @@ function Kelas() {
       {showModal && (
         <div className="fixed inset-0 bg-gray-200 bg-opacity-40 flex justify-center items-center">
           <Sidnav />
-          <div className="bg-white p-8 rounded-lg shadow w-110 ml-50">
+          <div className={`bg-white p-8 rounded-lg shadow w-110 ml-50 ${baseAnimation}`}>
             <h2 className="text-lg font-bold mb-4 flex items-center justify-center space-x-2">
               <img className="w-10 -ml-2" src={gambar} alt="" />
               {editId === null ? "Tambah Data Kelas" : "Edit Data Kelas"}
