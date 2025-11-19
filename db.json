@@ -87,6 +87,17 @@
       "status": true,
       "level": "",
       "kelas": ""
+    },
+    {
+      "id": "bc62",
+      "nama": "Narendra sakti widhitama",
+      "email": "yurawa@gmail.com",
+      "jenis": "Alat praktek",
+      "jumlah": 1200000,
+      "tanggal": "2025-11-19",
+      "status": true,
+      "level": "",
+      "kelas": ""
     }
   ],
   "jenis": [
