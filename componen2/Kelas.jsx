@@ -1,4 +1,3 @@
-// Kelas dengan Loading + Animasi
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Sidnav from "../src/componen/Sidnav";
@@ -101,7 +100,7 @@ const [showContent, setShowContent] = useState(false);
     );
 
   return (
-    <div className={`flex min-h-screen bg-gray-100 ${baseAnimation}`}>      
+    <div className="flex min-h-screen bg-gray-100">
       <Sidnav />
 
       <div className={`flex-1 p-8 ml-56 ${baseAnimation}`}>        

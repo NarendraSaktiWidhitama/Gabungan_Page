@@ -151,7 +151,7 @@ function Table({ title, data, tagihanTable, headerColor }) {
               {tagihanTable ? (
                 <>
                   <th className="py-2 px-3 text-left">Jenis</th>
-                  <th className="py-2 px-3 text-left">Jumlah</th>
+                  <th className="py-2 px-3 text-right">Jumlah</th>
                   <th className="py-2 px-3">Tanggal</th>
                   <th className="py-2 px-3">Status</th>
                 </>
@@ -173,7 +173,7 @@ function Table({ title, data, tagihanTable, headerColor }) {
                   {tagihanTable ? (
                     <>
                       <td className="py-2 px-3 text-left">{d.jenis}</td>
-                      <td className="py-2 px-3 text-left">
+                      <td className="py-2 px-3 text-right">
                         Rp {d.jumlah?.toLocaleString()}
                       </td>
                       <td className="py-2 px-3 text-center">

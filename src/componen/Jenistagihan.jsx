@@ -160,8 +160,8 @@ function Jenistagihan() {
               {jenis.map((j, i) => (
                 <tr key={j.id} className="hover:bg-green-50 border-gray-200">
                   <td className="p-2">{i + 1}</td>
-                  <td className="p-2 font-medium">{j.nama}</td>
-                  <td className="p-2">{j.keterangan || "-"}</td>
+                  <td className="p-2 font-medium text-left">{j.nama}</td>
+                  <td className="p-2 text-left">{j.keterangan || "-"}</td>
                   <td className="p-2">
                     <label className="inline-flex items-center cursor-pointer">
                       <input

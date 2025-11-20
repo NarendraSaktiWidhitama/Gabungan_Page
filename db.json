@@ -98,6 +98,28 @@
       "status": true,
       "level": "",
       "kelas": ""
+    },
+    {
+      "id": "1e7a",
+      "nama": "Adrean syahputra",
+      "email": "rean@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-11-20",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "21b7",
+      "nama": "Adrean syahputra",
+      "email": "yurawa@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-11-20",
+      "status": true,
+      "level": "",
+      "kelas": ""
     }
   ],
   "jenis": [
@@ -246,6 +268,13 @@
       "email": "yurawa@gmail.com",
       "kategori": "Siswa",
       "jabatan": "XI RPL"
+    },
+    {
+      "id": "65a1",
+      "nama": "Adrean syahputra",
+      "email": "yurawa@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "XII TKJ"
     }
   ],
   "kelas": [
@@ -305,7 +334,7 @@
       "jurusan": "DKV"
     },
     {
-      "id": "52e1",
+      "id": "80bd",
       "kelas": "XII",
       "jurusan": "RPL"
     }

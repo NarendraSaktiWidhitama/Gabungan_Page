@@ -133,34 +133,44 @@ function Tambahkategori() {
                 </option>
               ))}
             </select>
-
             {form.kategori === "Siswa" && (
               <select
-                name="jabatan"
-                value={form.jabatan}
-                onChange={handleChange}
-                className="w-full border px-4 py-2 rounded"
-                required
+              name="jabatan"
+              value={form.jabatan}
+              onChange={handleChange}
+              className="w-full border px-4 py-2 rounded"
+              required
               >
                 <option value="">Pilih Kelas & Jurusan</option>
                 {kelasList.map((k) => (
                   <option key={k.id} value={`${k.kelas} ${k.jurusan}`}>
                     {k.kelas} {k.jurusan}
-                  </option>
-                ))}
-              </select>
-            )}
-
-            {(form.kategori === "Guru" || form.kategori === "Karyawan") && (
-              <input
-                name="jabatan"
-                value={form.jabatan}
-                onChange={handleChange}
-                placeholder="Jabatan"
-                className="w-full border px-4 py-2 rounded"
-                required
-              />
-            )}
+                    </option>
+                  ))}
+                  </select>
+                )}
+                
+                {form.kategori === "Guru" && (
+                  <input
+                  name="jabatan"
+                  value={form.jabatan}
+                  onChange={handleChange}
+                  placeholder="Pilih mapel"
+                  className="w-full border px-4 py-2 rounded"
+                  required
+                  />
+                  )}
+                  
+                  {form.kategori === "Karyawan" && (
+                    <input
+                    name="jabatan"
+                    value={form.jabatan}
+                    onChange={handleChange}
+                    placeholder="Jabatan"
+                    className="w-full border px-4 py-2 rounded"
+                    required
+                    />
+                    )}
 
             <div className="pt-4 flex gap-3">
               <button
