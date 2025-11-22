@@ -6,6 +6,7 @@ function Rekaptagihan() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("harian");
+  const [filterStatus, setFilterStatus] = useState("semua");
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,6 @@ function Rekaptagihan() {
       } finally {
         setTimeout(() => {
           setLoading(false);
-
           setTimeout(() => setShowContent(true), 300);
         }, 600);
       }
@@ -32,7 +32,9 @@ function Rekaptagihan() {
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-t-4 border-emerald-500"></div>
-          <p className="mt-4 text-xl font-medium text-gray-700">Memuat rekapan</p>
+          <p className="mt-4 text-xl font-medium text-gray-700">
+            Memuat rekapan
+          </p>
         </div>
       </div>
     );
@@ -40,10 +42,25 @@ function Rekaptagihan() {
   const now = new Date();
   const filteredData = data.filter((item) => {
     const t = new Date(item.tanggal);
-    if (filter === "harian") return t.toDateString() === now.toDateString();
-    if (filter === "mingguan") return t >= new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
-    if (filter === "bulanan") return t.getMonth() === now.getMonth() && t.getFullYear() === now.getFullYear();
-    return true;
+
+    // Filter waktu
+    let matchTime = false;
+    if (filter === "harian")
+      matchTime = t.toDateString() === now.toDateString();
+    else if (filter === "mingguan")
+      matchTime =
+        t >= new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
+    else if (filter === "bulanan")
+      matchTime =
+        t.getMonth() === now.getMonth() && t.getFullYear() === now.getFullYear();
+    else matchTime = true;
+
+    let matchStatus = false;
+    if (filterStatus === "semua") matchStatus = true;
+    else if (filterStatus === "Lunas") matchStatus = item.status === true;
+    else if (filterStatus === "belum") matchStatus = item.status === false;
+
+    return matchTime && matchStatus;
   });
 
   return (
@@ -52,7 +69,7 @@ function Rekaptagihan() {
 
       <div
         className={`flex-1 p-8 ml-56 overflow-x-auto transition-all duration-700 
-        ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
       >
         <div className="bg-gradient-to-r from-emerald-300 to-emerald-400 p-4 rounded-lg mb-6 shadow-md">
           <div className="flex items-center gap-3">
@@ -61,20 +78,35 @@ function Rekaptagihan() {
           </div>
         </div>
 
-        <div className="flex items-center mb-4">
-          <label className="font-medium mr-2">Filter Waktu:</label>
-          <select
-            className="border rounded px-3 py-1"
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          >
-            <option value="harian">Harian</option>
-            <option value="mingguan">Mingguan</option>
-            <option value="bulanan">Bulanan</option>
-          </select>
+        <div className="flex items-center mb-4 gap-6">
+          <div>
+            <label className="font-medium mr-2">Filter Waktu:</label>
+            <select
+              className="border rounded px-3 py-1"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="harian">Harian</option>
+              <option value="mingguan">Mingguan</option>
+              <option value="bulanan">Bulanan</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="font-medium mr-2">Filter Status:</label>
+            <select
+              className="border rounded px-3 py-1"
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+            >
+              <option value="semua">Semua</option>
+              <option value="Lunas">Sudah Lunas</option>
+              <option value="belum">Belum Lunas</option>
+            </select>
+          </div>
         </div>
 
-        <div className="bg-white p-5 rounded-lg shadow-xl min-w-[900px]">
+        <div className="bg-white p-5 rounded-lg shadow-xl min-w-[1000px]">
           <table className="w-full text-[15px] border-collapse">
             <thead className="bg-gradient-to-r from-emerald-300 to-emerald-300">
               <tr>
@@ -84,27 +116,37 @@ function Rekaptagihan() {
                 <th className="py-2 px-3 w-[130px]">Jenis</th>
                 <th className="py-2 px-3 w-[110px]">Jumlah</th>
                 <th className="py-2 px-3 w-[110px]">Tanggal</th>
+                <th className="py-2 px-3 w-[120px]">Status</th>
               </tr>
             </thead>
 
             <tbody>
               {filteredData.map((d, i) => (
-                <tr
-                  key={d.id}
-                  className="hover:bg-gray-50 transition-all duration-500"
-                >
+                <tr key={d.id} className="hover:bg-gray-50 transition-all duration-500">
                   <td className="py-2 px-3 text-right">{i + 1}</td>
                   <td className="py-2 px-3 text-left">{d.nama}</td>
                   <td className="py-2 px-3 text-left">{d.email}</td>
                   <td className="py-2 px-3 text-center">{d.jenis}</td>
-                  <td className="py-2 px-3 text-right">Rp {d.jumlah?.toLocaleString()}</td>
+                  <td className="py-2 px-3 text-right">
+                    Rp {d.jumlah?.toLocaleString()}
+                  </td>
                   <td className="py-2 px-3 text-center">
-                    {d.tanggal ? new Date(d.tanggal).toLocaleDateString("id-ID") : "-"}
+                    {d.tanggal
+                      ? new Date(d.tanggal).toLocaleDateString("id-ID")
+                      : "-"}
+                  </td>
+
+                  <td
+                    className={`py-2 px-3 text-center font-semibold ${
+                      d.status ? "text-green-600" : "text-red-500"
+                    }`}
+                  >
+                    {d.status ? "Lunas" : "Belum Lunas"}
                   </td>
                 </tr>
               ))}
 
-              {data.length === 0 && (
+              {filteredData.length === 0 && (
                 <tr>
                   <td colSpan="8" className="p-6 text-gray-500 text-center">
                     Tidak ada data

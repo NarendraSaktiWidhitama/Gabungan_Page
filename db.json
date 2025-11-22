@@ -23,100 +23,23 @@
   ],
   "data": [
     {
-      "id": "9bd9",
+      "id": "6491",
       "nama": "Narendra sakti widhitama",
       "email": "yurawa@gmail.com",
       "jenis": "SPP Bulanan",
       "jumlah": 250000,
-      "tanggal": "2025-11-12",
+      "tanggal": "2025-11-22",
       "status": true,
       "level": "",
       "kelas": ""
     },
     {
-      "id": "a521",
-      "nama": "Darren sefhiros jacobson",
-      "email": "seft@gmail.com",
-      "jenis": "SPP Bulanan",
-      "jumlah": 250000,
-      "tanggal": "2025-11-12",
-      "status": true,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "d3ca",
-      "nama": "Adrean syahputra",
-      "email": "rean@gmail.com",
-      "jenis": "Uang Ujian",
-      "jumlah": 1000000,
-      "tanggal": "2025-11-12",
-      "status": false,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "cd7f",
-      "nama": "Narendra sakti widhitama",
-      "email": "yurawa@gmail.com",
-      "jenis": "Alat praktek",
-      "jumlah": 1000000,
-      "tanggal": "2025-11-17",
-      "status": true,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "e245",
-      "nama": "Adrean syahputra",
-      "email": "rean@gmail.com",
-      "jenis": "Alat praktek",
-      "jumlah": 1000000,
-      "tanggal": "2025-11-17",
-      "status": true,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "a204",
-      "nama": "mia luna tearmoon",
-      "email": "luna@gmail.com",
-      "jenis": "SPP Bulanan",
-      "jumlah": 250000,
-      "tanggal": "2025-11-17",
-      "status": true,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "bc62",
-      "nama": "Narendra sakti widhitama",
-      "email": "yurawa@gmail.com",
-      "jenis": "Alat praktek",
-      "jumlah": 1200000,
-      "tanggal": "2025-11-19",
-      "status": true,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "1e7a",
-      "nama": "Adrean syahputra",
-      "email": "rean@gmail.com",
-      "jenis": "SPP Bulanan",
-      "jumlah": 250000,
-      "tanggal": "2025-11-20",
-      "status": true,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "21b7",
+      "id": "8f2c",
       "nama": "Adrean syahputra",
       "email": "yurawa@gmail.com",
       "jenis": "SPP Bulanan",
       "jumlah": 250000,
-      "tanggal": "2025-11-20",
+      "tanggal": "2025-11-22",
       "status": true,
       "level": "",
       "kelas": ""
@@ -275,6 +198,34 @@
       "email": "yurawa@gmail.com",
       "kategori": "Siswa",
       "jabatan": "XII TKJ"
+    },
+    {
+      "id": "660e",
+      "nama": "Raja malaya",
+      "email": "malaya@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru ipa"
+    },
+    {
+      "id": "a707",
+      "nama": "Tino shade",
+      "email": "Tino@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru informatika"
+    },
+    {
+      "id": "49ca",
+      "nama": "Ninym relai",
+      "email": "Ninym@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "security"
+    },
+    {
+      "id": "2729",
+      "nama": "Zyne del rey",
+      "email": "zynerey@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "security"
     }
   ],
   "kelas": [

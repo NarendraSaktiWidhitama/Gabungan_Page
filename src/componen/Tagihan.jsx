@@ -174,7 +174,6 @@ function Tagihan() {
           </button>
         </div>
 
-        {/* 🧾 Bagian tabel yang sudah diperbaiki */}
         <div className="bg-white p-5 rounded-lg shadow-xl overflow-hidden">
           <div className="w-full overflow-x-auto md:overflow-x-hidden">
             <table className="w-full text-[15px] border-collapse table-fixed">
@@ -263,7 +262,6 @@ function Tagihan() {
             </table>
           </div>
         </div>
-        {/* 🧾 End tabel */}
       </div>
     </div>
   );
