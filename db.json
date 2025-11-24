@@ -40,7 +40,7 @@
       "jenis": "SPP Bulanan",
       "jumlah": 250000,
       "tanggal": "2025-11-22",
-      "status": true,
+      "status": false,
       "level": "",
       "kelas": ""
     }

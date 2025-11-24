@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Logo from "../assets/Logo.png"
 import myvideo from "../assets/Zz.mp4";
 
 function Login() {
@@ -58,7 +59,8 @@ function Login() {
       </div>
 
       <div className="bg-white rounded-2xl shadow-xl p-10 w-96 z-10">
-        <h1 className="text-3xl font-bold text-center mb-6">
+        <h1 className="text-3xl font-bold mb-6 flex items-center justify-center gap-2">
+          <img className="w-8 -ml-6" src={Logo} alt="" />
           Login
         </h1>
         <form onSubmit={handleLogin} className="flex flex-col gap-4 font-sans">
