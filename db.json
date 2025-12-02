@@ -43,6 +43,17 @@
       "status": false,
       "level": "",
       "kelas": ""
+    },
+    {
+      "id": "1ff4",
+      "nama": "Narendra sakti widhitama",
+      "email": "yurawa@gmail.com",
+      "jenis": "Alat praktek",
+      "jumlah": 1000000,
+      "tanggal": "2025-12-02",
+      "status": false,
+      "level": "",
+      "kelas": ""
     }
   ],
   "jenis": [
@@ -128,20 +139,6 @@
       "email": "rean@gmail.com",
       "kategori": "Siswa",
       "jabatan": "X DKV"
-    },
-    {
-      "id": "529d",
-      "nama": "Bibir gajah",
-      "email": "asaasa@gmail.com",
-      "kategori": "security",
-      "jabatan": "Satpam"
-    },
-    {
-      "id": "2250",
-      "nama": "supatman saputra",
-      "email": "putra@gmail.com",
-      "kategori": "ustadz",
-      "jabatan": "Imam sholat jamaah"
     },
     {
       "id": "9396",
@@ -288,6 +285,16 @@
       "id": "80bd",
       "kelas": "XII",
       "jurusan": "RPL"
+    }
+  ],
+  "presensi": [
+    {
+      "id": "a624",
+      "nama": "Narendra sakti widhitama",
+      "kategori": "Siswa",
+      "tanggal": "2/12/2025",
+      "jam_masuk": "14.20.01",
+      "jam_pulang": "2:21:28 PM"
     }
   ]
 }

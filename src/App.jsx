@@ -14,6 +14,8 @@ import Rekaptagihan from "./componen/Rekaptagihan"
 import Masterdata from "../componen2/Masterdata";
 import Kelas from "../componen2/Kelas";
 import Sidnav from "./componen/Sidnav";
+import Presensi from "./Presensi/Presensi";
+import RekapPresensi from "./Presensi/RekapPresensi";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
       <Route path="/tambahdata" element={<Tambahdata />} />
       <Route path="/tambahkategori" element={<Tambahkategori />} />
       <Route path="/Kelas" element={<Kelas />} />
+      <Route path="/Presensi" element={<Presensi />} />
+      <Route path="/RekapPresensi" element={<RekapPresensi />} />
       <Route path="/Masterdata" element={<Masterdata />} />
       <Route path="/edit/:id" element={<Editdata />} />
       <Route path="/editkategori/:id" element={<Editkategori />} />
