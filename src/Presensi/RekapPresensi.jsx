@@ -4,87 +4,109 @@ import Sidnav from "../componen/Sidnav";
 
 function RekapPresensi() {
   const [data, setData] = useState([]);
-  const [tanggal, setTanggal] = useState("");
-
-  const fetchData = () => {
-    axios.get("http://localhost:5000/presensi").then((res) => {
-      setData(res.data);
-    });
-  };
+  const [filter, setFilter] = useState("harian");
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    getData();
+  }, [filter]);
 
-  const handlePulang = async (id) => {
-    const jamPulang = new Date().toLocaleTimeString();
+  const getData = async () => {
+    const res = await axios.get("http://localhost:5000/presensi");
+    const all = res.data;
 
-    await axios.patch(`http://localhost:5000/presensi/${id}`, {
-      jam_pulang: jamPulang,
+    const today = new Date();
+    
+    const filtered = all.filter((item) => {
+      const tgl = new Date(
+        item.tanggal.split("/")[2],
+        item.tanggal.split("/")[1] - 1,
+        item.tanggal.split("/")[0]
+      );
+
+      if (filter === "harian") {
+        return (
+          tgl.getDate() === today.getDate() &&
+          tgl.getMonth() === today.getMonth() &&
+          tgl.getFullYear() === today.getFullYear()
+        );
+      }
+
+      if (filter === "mingguan") {
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(today.getDate() - 7);
+        return tgl >= oneWeekAgo && tgl <= today;
+      }
+
+      if (filter === "bulanan") {
+        return (
+          tgl.getMonth() === today.getMonth() &&
+          tgl.getFullYear() === today.getFullYear()
+        );
+      }
+
+      return true;
     });
 
-    fetchData();
+    setData(filtered);
   };
-
-  const filtered = tanggal
-    ? data.filter((a) => a.tanggal === tanggal)
-    : data;
 
   return (
     <div className="flex">
       <Sidnav />
 
       <div className="ml-64 p-6 w-full">
-        <h1 className="text-2xl font-bold mb-4">Rekap Presensi</h1>
-
-        <div className="bg-white border shadow rounded-xl p-5 mb-4">
-          <input
-            type="text"
-            className="border p-3 rounded w-full"
-            placeholder="Filter tanggal (contoh: 1/12/2025)"
-            value={tanggal}
-            onChange={(e) => setTanggal(e.target.value)}
-          />
+        <div className="flex justify-between items-center bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow mb-6">
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            <i className="ri-database-2-fill"></i> Rekap Presensi
+          </h1>
+        </div>
+        <div className="rounded-xl mb-5 max-w-xs">
+          <label className="font-semibold">Filter Presensi</label>
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="border p-3 w-full rounded mt-1"
+          >
+            <option value="harian">Harian</option>
+            <option value="mingguan">Mingguan</option>
+            <option value="bulanan">Bulanan</option>
+          </select>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-center bg-white shadow rounded-xl">
-            <thead className="bg-gray-100 font-semibold">
-              <tr>
+        <div className="bg-white p-4 rounded-xl shadow overflow-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-emerald-300">
+                <th className="p-2">No</th>
                 <th className="p-2">Nama</th>
                 <th className="p-2">Kategori</th>
                 <th className="p-2">Tanggal</th>
                 <th className="p-2">Jam Masuk</th>
                 <th className="p-2">Jam Pulang</th>
-                <th className="p-2">Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map((a) => (
-                <tr key={a.id} className="hover:bg-gray-50">
-                  <td className="p-2">{a.nama}</td>
-                  <td className="p-2">{a.category}</td>
-                  <td className="p-2">{a.tanggal}</td>
-                  <td className="p-2">{a.jam_masuk}</td>
-                  <td className="p-2">
-                    {a.jam_pulang || "-"}
-                  </td>
-                  <td className="p-2">
-                    {!a.jam_pulang && (
-                      <button
-                        className="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-700"
-                        onClick={() => handlePulang(a.id)}
-                      >
-                        Set Pulang
-                      </button>
-                    )}
+              {data.length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="text-center p-4">
+                    Tidak ada presensi ditemukan.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                data.map((item, i) => (
+                  <tr key={item.id} className="text-center">
+                    <td className="p-2">{i + 1}</td>
+                    <td className="p-2 text-left">{item.nama}</td>
+                    <td className="p-2">{item.kategori}</td>
+                    <td className="p-2">{item.tanggal}</td>
+                    <td className="p-2">{item.jam_masuk}</td>
+                    <td className="p-2">{item.jam_pulang || "-"}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   );

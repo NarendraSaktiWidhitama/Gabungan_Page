@@ -289,12 +289,60 @@
   ],
   "presensi": [
     {
-      "id": "a624",
-      "nama": "Narendra sakti widhitama",
+      "id": "d727",
+      "nama": "Darren sefhiros jacobson",
       "kategori": "Siswa",
-      "tanggal": "2/12/2025",
-      "jam_masuk": "14.20.01",
-      "jam_pulang": "2:21:28 PM"
+      "tanggal": "3/12/2025",
+      "jam_masuk": "07.36.55",
+      "jam_pulang": "07.37.52"
+    },
+    {
+      "id": "b1b0",
+      "nama": "Adrean syahputra",
+      "kategori": "Siswa",
+      "tanggal": "3/12/2025",
+      "jam_masuk": "07.41.11",
+      "jam_pulang": "07.45.55"
+    },
+    {
+      "id": "f1e8",
+      "nama": "Ninym relai",
+      "kategori": "Karyawan",
+      "tanggal": "3/12/2025",
+      "jam_masuk": "07.49.45",
+      "jam_pulang": "07.50.01"
+    },
+    {
+      "id": "7d05",
+      "nama": "Arif riansyah",
+      "kategori": "Guru",
+      "tanggal": "3/12/2025",
+      "jam_masuk": "07.49.52",
+      "jam_pulang": "07.50.03"
+    },
+    {
+      "id": "6254",
+      "nama": "faza top tegar",
+      "kategori": "Guru",
+      "tanggal": "3/12/2025",
+      "jam_masuk": "08.00.37",
+      "jam_pulang": ""
+    },
+    {
+      "id": "2d99",
+      "nama": "Darren sefhiros jacobson",
+      "kategori": "Karyawan",
+      "tanggal": "3/12/2025",
+      "jam_masuk": "08.44.39",
+      "jam_pulang": ""
+    },
+    {
+      "id": "f860",
+      "nama": "Darren sefhiros jacobson",
+      "kategori": "Karyawan",
+      "tanggal": "3/12/2025",
+      "jam_masuk": "11.00.01",
+      "jam_pulang": "11.00.04"
     }
   ]
 }

@@ -81,7 +81,7 @@ const Sidnav = () => {
 
         <div>
           <p className="text-xs font-bold text-gray-700 mb-1 px-2 uppercase">
-            Keuangan
+            Presensi
           </p>
           <Link to="/Presensi" className={linkClass("/Presensi")}>
             <i className="ri-price-tag-3-fill"></i> Presensi
