@@ -23,35 +23,13 @@
   ],
   "data": [
     {
-      "id": "6491",
+      "id": "9b9a",
       "nama": "Narendra sakti widhitama",
       "email": "yurawa@gmail.com",
       "jenis": "SPP Bulanan",
       "jumlah": 250000,
-      "tanggal": "2025-11-22",
+      "tanggal": "2025-12-05",
       "status": true,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "8f2c",
-      "nama": "Adrean syahputra",
-      "email": "yurawa@gmail.com",
-      "jenis": "SPP Bulanan",
-      "jumlah": 250000,
-      "tanggal": "2025-11-22",
-      "status": false,
-      "level": "",
-      "kelas": ""
-    },
-    {
-      "id": "1ff4",
-      "nama": "Narendra sakti widhitama",
-      "email": "yurawa@gmail.com",
-      "jenis": "Alat praktek",
-      "jumlah": 1000000,
-      "tanggal": "2025-12-02",
-      "status": false,
       "level": "",
       "kelas": ""
     }
@@ -106,123 +84,20 @@
   ],
   "masterdata": [
     {
-      "id": "6086",
-      "nama": "Narendra sakti widhitama",
-      "email": "yurawa@gmail.com",
-      "kategori": "Siswa",
-      "jabatan": "X TKJ"
-    },
-    {
-      "id": "210c",
-      "nama": "Arif riansyah",
-      "email": "asaasa@gmail.com",
-      "kategori": "Guru",
-      "jabatan": "Guru informatika"
-    },
-    {
-      "id": "c6d6",
-      "nama": "Darren sefhiros jacobson",
-      "email": "seft@gmail.com",
-      "kategori": "Siswa",
-      "jabatan": "X TKJ"
-    },
-    {
-      "id": "01b4",
-      "nama": "Bibir gajah",
-      "email": "Bibirgajah@gmail.com",
-      "kategori": "Karyawan",
-      "jabatan": "Bendahara kelas"
-    },
-    {
-      "id": "010f",
+      "id": "11ec",
       "nama": "Adrean syahputra",
       "email": "rean@gmail.com",
       "kategori": "Siswa",
-      "jabatan": "X DKV"
+      "jabatan": "X TKJ",
+      "rfid": "8167801850"
     },
     {
-      "id": "9396",
-      "nama": "mia luna tearmoon",
-      "email": "luna@gmail.com",
-      "kategori": "Siswa",
-      "jabatan": "X DKV"
-    },
-    {
-      "id": "f248",
-      "nama": "widhi saputra",
-      "email": "saput@gmail.com",
-      "kategori": "Siswa",
-      "jabatan": "XII DKV"
-    },
-    {
-      "id": "8edc",
-      "nama": "faza top tegar",
-      "email": "faza@gmail.com",
-      "kategori": "Guru",
-      "jabatan": "Guru matematika"
-    },
-    {
-      "id": "eb6a",
-      "nama": "faza top tegar",
-      "email": "faza@gmail.com",
-      "kategori": "Karyawan",
-      "jabatan": "Bendahara"
-    },
-    {
-      "id": "6dfe",
-      "nama": "Darren sefhiros jacobson",
-      "email": "seft@gmail.com",
-      "kategori": "Karyawan",
-      "jabatan": "Satpam"
-    },
-    {
-      "id": "cdfe",
-      "nama": "supatman saputra",
-      "email": "putra@gmail.com",
-      "kategori": "Guru",
-      "jabatan": "Guru bahasa indonesia"
-    },
-    {
-      "id": "cb77",
-      "nama": "Adrean syahputra",
+      "id": "22ae",
+      "nama": "Narendra sakti widhitama",
       "email": "yurawa@gmail.com",
       "kategori": "Siswa",
-      "jabatan": "XI RPL"
-    },
-    {
-      "id": "65a1",
-      "nama": "Adrean syahputra",
-      "email": "yurawa@gmail.com",
-      "kategori": "Siswa",
-      "jabatan": "XII TKJ"
-    },
-    {
-      "id": "660e",
-      "nama": "Raja malaya",
-      "email": "malaya@gmail.com",
-      "kategori": "Guru",
-      "jabatan": "Guru ipa"
-    },
-    {
-      "id": "a707",
-      "nama": "Tino shade",
-      "email": "Tino@gmail.com",
-      "kategori": "Guru",
-      "jabatan": "Guru informatika"
-    },
-    {
-      "id": "49ca",
-      "nama": "Ninym relai",
-      "email": "Ninym@gmail.com",
-      "kategori": "Karyawan",
-      "jabatan": "security"
-    },
-    {
-      "id": "2729",
-      "nama": "Zyne del rey",
-      "email": "zynerey@gmail.com",
-      "kategori": "Karyawan",
-      "jabatan": "security"
+      "jabatan": "X DKV",
+      "rfid": "2069745276"
     }
   ],
   "kelas": [
@@ -289,60 +164,26 @@
   ],
   "presensi": [
     {
-      "id": "d727",
-      "nama": "Darren sefhiros jacobson",
-      "kategori": "Siswa",
-      "tanggal": "3/12/2025",
-      "jam_masuk": "07.36.55",
-      "jam_pulang": "07.37.52"
-    },
-    {
-      "id": "b1b0",
+      "id": "e56c",
       "nama": "Adrean syahputra",
       "kategori": "Siswa",
-      "tanggal": "3/12/2025",
-      "jam_masuk": "07.41.11",
-      "jam_pulang": "07.45.55"
+      "rfid": "8167801850",
+      "tanggal": "5/12/2025",
+      "jam_masuk": "08.37.41",
+      "jam_pulang": "-",
+      "status": "hadir",
+      "keterangan": "-"
     },
     {
-      "id": "f1e8",
-      "nama": "Ninym relai",
-      "kategori": "Karyawan",
-      "tanggal": "3/12/2025",
-      "jam_masuk": "07.49.45",
-      "jam_pulang": "07.50.01"
-    },
-    {
-      "id": "7d05",
-      "nama": "Arif riansyah",
-      "kategori": "Guru",
-      "tanggal": "3/12/2025",
-      "jam_masuk": "07.49.52",
-      "jam_pulang": "07.50.03"
-    },
-    {
-      "id": "6254",
-      "nama": "faza top tegar",
-      "kategori": "Guru",
-      "tanggal": "3/12/2025",
-      "jam_masuk": "08.00.37",
-      "jam_pulang": ""
-    },
-    {
-      "id": "2d99",
-      "nama": "Darren sefhiros jacobson",
-      "kategori": "Karyawan",
-      "tanggal": "3/12/2025",
-      "jam_masuk": "08.44.39",
-      "jam_pulang": ""
-    },
-    {
-      "id": "f860",
-      "nama": "Darren sefhiros jacobson",
-      "kategori": "Karyawan",
-      "tanggal": "3/12/2025",
-      "jam_masuk": "11.00.01",
-      "jam_pulang": "11.00.04"
+      "id": "2e9a",
+      "nama": "Narendra sakti widhitama",
+      "kategori": "Siswa",
+      "rfid": "2069745276",
+      "tanggal": "5/12/2025",
+      "jam_masuk": "09.09.16",
+      "jam_pulang": "-",
+      "status": "hadir",
+      "keterangan": "-"
     }
   ]
 }

@@ -76,35 +76,41 @@ function RekapPresensi() {
         <div className="bg-white p-4 rounded-xl shadow overflow-auto">
           <table className="w-full border-collapse">
             <thead>
-              <tr className="bg-emerald-300">
-                <th className="p-2">No</th>
-                <th className="p-2">Nama</th>
-                <th className="p-2">Kategori</th>
-                <th className="p-2">Tanggal</th>
-                <th className="p-2">Jam Masuk</th>
-                <th className="p-2">Jam Pulang</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.length === 0 ? (
-                <tr>
-                  <td colSpan="6" className="text-center p-4">
-                    Tidak ada presensi ditemukan.
-                  </td>
-                </tr>
-              ) : (
-                data.map((item, i) => (
-                  <tr key={item.id} className="text-center">
-                    <td className="p-2">{i + 1}</td>
-                    <td className="p-2 text-left">{item.nama}</td>
-                    <td className="p-2">{item.kategori}</td>
-                    <td className="p-2">{item.tanggal}</td>
-                    <td className="p-2">{item.jam_masuk}</td>
-                    <td className="p-2">{item.jam_pulang || "-"}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
+  <tr className="bg-emerald-300">
+    <th className="p-2">No</th>
+    <th className="p-2">Nama</th>
+    <th className="p-2">Kategori</th>
+    <th className="p-2">RFID</th> {/* ✅ TAMBAH KOLOM */}
+    <th className="p-2">Tanggal</th>
+    <th className="p-2">Status</th>
+    <th className="p-2">Jam Masuk</th>
+    <th className="p-2">Jam Pulang</th>
+  </tr>
+</thead>
+<tbody>
+  {data.length === 0 ? (
+    <tr>
+      <td colSpan="7" className="text-center p-4">
+        Tidak ada presensi ditemukan.
+      </td>
+    </tr>
+  ) : (
+    data.map((item, i) => (
+      <tr key={item.id} className="text-center">
+        <td className="p-2">{i + 1}</td>
+        <td className="p-2 text-left">{item.nama}</td>
+        <td className="p-2">{item.kategori}</td>
+        <td className="p-2">{item.rfid}</td> {/* ✅ TAMPILKAN RFID */}
+        <td className="p-2">{item.tanggal}</td>
+        <td className="p-2">
+          {item.status || "-"} {/* ⬅️ Tambahan */}
+        </td>
+        <td className="p-2">{item.jam_masuk}</td>
+        <td className="p-2">{item.jam_pulang || "-"}</td>
+      </tr>
+    ))
+  )}
+</tbody>
           </table>
         </div>
       </div>

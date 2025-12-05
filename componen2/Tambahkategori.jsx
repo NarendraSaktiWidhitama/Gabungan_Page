@@ -20,6 +20,11 @@ function Tambahkategori() {
   const [kelasList, setKelasList] = useState([]);
   const [kategoriList, setKategoriList] = useState([]);
 
+  // 🔥 AUTO GENERATE RFID
+  const generateRFID = () => {
+    return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+  };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -34,7 +39,6 @@ function Tambahkategori() {
     axios
       .get("http://localhost:5000/kategori")
       .then((res) => {
-        console.log("Data kategori dari backend:", res.data);
         setKategoriList(res.data);
       })
       .catch((err) => console.error("Gagal mengambil kategori:", err));
@@ -58,6 +62,7 @@ function Tambahkategori() {
       await axios.post("http://localhost:5000/masterdata", {
         ...form,
         jabatan: finalJabatan,
+        rfid: generateRFID(),   // 🔥 WAJIB BIAR KEISI RFID
       });
 
       Swal.fire({
@@ -133,44 +138,45 @@ function Tambahkategori() {
                 </option>
               ))}
             </select>
+
             {form.kategori === "Siswa" && (
               <select
-              name="jabatan"
-              value={form.jabatan}
-              onChange={handleChange}
-              className="w-full border px-4 py-2 rounded"
-              required
+                name="jabatan"
+                value={form.jabatan}
+                onChange={handleChange}
+                className="w-full border px-4 py-2 rounded"
+                required
               >
                 <option value="">Pilih Kelas & Jurusan</option>
                 {kelasList.map((k) => (
                   <option key={k.id} value={`${k.kelas} ${k.jurusan}`}>
                     {k.kelas} {k.jurusan}
-                    </option>
-                  ))}
-                  </select>
-                )}
-                
-                {form.kategori === "Guru" && (
-                  <input
-                  name="jabatan"
-                  value={form.jabatan}
-                  onChange={handleChange}
-                  placeholder="Pilih mapel"
-                  className="w-full border px-4 py-2 rounded"
-                  required
-                  />
-                  )}
-                  
-                  {form.kategori === "Karyawan" && (
-                    <input
-                    name="jabatan"
-                    value={form.jabatan}
-                    onChange={handleChange}
-                    placeholder="Jabatan"
-                    className="w-full border px-4 py-2 rounded"
-                    required
-                    />
-                    )}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            {form.kategori === "Guru" && (
+              <input
+                name="jabatan"
+                value={form.jabatan}
+                onChange={handleChange}
+                placeholder="Pilih mapel"
+                className="w-full border px-4 py-2 rounded"
+                required
+              />
+            )}
+
+            {form.kategori === "Karyawan" && (
+              <input
+                name="jabatan"
+                value={form.jabatan}
+                onChange={handleChange}
+                placeholder="Jabatan"
+                className="w-full border px-4 py-2 rounded"
+                required
+              />
+            )}
 
             <div className="pt-4 flex gap-3">
               <button

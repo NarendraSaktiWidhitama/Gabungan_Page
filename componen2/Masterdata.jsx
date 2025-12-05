@@ -12,7 +12,7 @@ function Masterdata() {
   const [loading, setLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
 
-  const [kategoriList, setKategoriList] = useState([]); // <- TAMBAHAN
+  const [kategoriList, setKategoriList] = useState([]);
 
   const navigate = useNavigate();
 
@@ -33,7 +33,6 @@ function Masterdata() {
     }
   };
 
-  // ✅ LOAD KATEGORI DARI API
   const loadKategori = async () => {
     try {
       const res = await axios.get("http://localhost:5000/kategori");
@@ -107,7 +106,6 @@ function Masterdata() {
 
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-3">
-            
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
@@ -147,6 +145,7 @@ function Masterdata() {
                 <th className="p-2">Email</th>
                 <th className="p-2">Kategori</th>
                 <th className="p-2">Jabatan/Kelas</th>
+                <th className="p-2">RFID</th> {/* Tambahan */}
                 <th className="p-2 text-center">Aksi</th>
               </tr>
             </thead>
@@ -159,6 +158,7 @@ function Masterdata() {
                   <td className="p-2">{d.email}</td>
                   <td className="p-2">{d.kategori}</td>
                   <td className="p-2">{d.jabatan}</td>
+                  <td className="p-2">{d.rfid}</td> {/* Tambahan */}
                   <td className="p-2 text-center">
                     <button
                       onClick={() => navigate(`/editkategori/${d.id}`)}
