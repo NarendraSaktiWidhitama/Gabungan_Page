@@ -61,13 +61,11 @@ function Tambahdata() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      // Ambil semua data dari jenis & masterdata
       const [dataJenis, dataMaster] = await Promise.all([
         axios.get("http://localhost:5000/jenis"),
         axios.get("http://localhost:5000/masterdata"),
       ]);
 
-      // Filter hanya jenis yang aktif
       const aktifJenis = dataJenis.data.filter((item) => {
         const aktifValue =
           typeof item.aktif === "string"
@@ -82,7 +80,6 @@ function Tambahdata() {
         );
       });
 
-      // 🔥 Filter hanya siswa
       const hanyaSiswa = dataMaster.data.filter(
         (item) =>
           item.level?.toLowerCase() === "siswa" ||
@@ -171,7 +168,6 @@ function Tambahdata() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
 
-            {/* NAMA */}
             <select
               onChange={handleSelectNama}
               className="w-full border px-4 py-2 rounded"
@@ -185,7 +181,6 @@ function Tambahdata() {
               ))}
             </select>
 
-            {/* EMAIL */}
             <input
               name="email"
               value={form.email}
@@ -193,7 +188,6 @@ function Tambahdata() {
               className="w-full border px-4 py-2 bg-gray-100 rounded"
             />
 
-            {/* JENIS */}
             <select
               name="jenis"
               value={form.jenis}
@@ -209,7 +203,6 @@ function Tambahdata() {
               ))}
             </select>
 
-            {/* JUMLAH */}
             <input
               name="jumlah"
               value={form.jumlah}
@@ -220,7 +213,6 @@ function Tambahdata() {
               required
             />
 
-            {/* TANGGAL */}
             <input
               name="tanggal"
               type="date"

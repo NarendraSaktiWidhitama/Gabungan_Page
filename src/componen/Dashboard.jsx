@@ -2,113 +2,137 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidnav from "./Sidnav";
 
-const cardAnimationClasses = (index, show) =>
-  `transition-all duration-700 ease-out transform ${
-    show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-  } ${show ? `delay-${index * 150}` : "delay-0"}`;
+const cardAnimationClasses = (index, show) => {
+  const delayClass = show ? `delay-${index * 150}` : "delay-0";
+  const visibilityClass = show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4";
+  return `transition-all duration-700 ease-out transform ${visibilityClass} ${delayClass}`;
+};
 
 function Dashboard() {
   const [kategoridata, setKategoridata] = useState([]);
   const [tagihan, setTagihan] = useState([]);
+  const [presensi, setPresensi] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-  const load = async () => {
-    try {
-      setLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 500));
+    const load = async () => {
+      try {
+        setLoading(true);
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
-      const [resKategoridata, resTagihan] = await Promise.all([
-        axios.get("http://localhost:5000/masterdata"),
-        axios.get("http://localhost:5000/data"),
-      ]);
+        const [resKategoridata, resTagihan, resPresensi] = await Promise.all([
+          axios.get("http://localhost:5000/masterdata"),
+          axios.get("http://localhost:5000/data"),
+          axios.get("http://localhost:5000/presensi"), // ✅ TAMBAHAN
+        ]);
 
-      setKategoridata(resKategoridata.data.reverse());
-      setTagihan(resTagihan.data.reverse());
-
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-      setTimeout(() => setShowContent(true), 50);
-    }
-  };
-  load();
-}, []);
+        setKategoridata(resKategoridata.data.reverse());
+        setTagihan(resTagihan.data.reverse());
+        setPresensi(resPresensi.data.reverse()); // ✅ TAMBAHAN
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+        setTimeout(() => setShowContent(true), 50);
+      }
+    };
+    load();
+  }, []);
 
   if (loading && !showContent)
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-t-4 border-emerald-500"></div>
-          <p className="mt-4 text-xl font-medium text-gray-700">Memuat dashboard</p>
+          <p className="mt-4 text-xl font-medium text-gray-700">
+            Memuat dashboard
+          </p>
         </div>
       </div>
     );
 
-const kategoriOrder = ["Siswa", "Guru", "Karyawan"];
-const kategoriCards = kategoriOrder.map(kat => {
-  let bgColor = kat === "Siswa" ? "bg-green-500" :
-                kat === "Guru" ? "bg-blue-500" :
-                "bg-yellow-500";
-  let icon = kat === "Siswa" ? "ri-user-line" :
-             kat === "Guru" ? "ri-team-line" :
-             "ri-user-settings-line";
-  return {
-    title: `Total ${kat}`,
-    value: kategoridata.filter(d => d.kategori === kat).length,
-    bgColor,
-    icon,
-  };
-});
+  const kategoriOrder = ["Siswa", "Guru", "Karyawan"];
+  const kategoriCards = kategoriOrder.map((kat) => {
+    let bgColor =
+      kat === "Siswa"
+        ? "bg-green-500"
+        : kat === "Guru"
+        ? "bg-blue-500"
+        : "bg-yellow-500";
+    let icon =
+      kat === "Siswa"
+        ? "ri-user-line"
+        : kat === "Guru"
+        ? "ri-team-line"
+        : "ri-user-settings-line";
+    return {
+      title: `Total ${kat}`,
+      value: kategoridata.filter((d) => d.kategori === kat).length,
+      bgColor,
+      icon,
+    };
+  });
 
-
-const totalTagihan = tagihan.reduce((sum, item) => sum + (item.jumlah || 0), 0);
-const sudahBayar = tagihan.filter((d) => d.status === true).length;
-const belumBayar = tagihan.filter((d) => !d.status).length;
+  const totalTagihan = tagihan.reduce((sum, item) => sum + (item.jumlah || 0), 0);
+  const sudahBayar = tagihan.filter((d) => d.status === true).length;
+  const belumBayar = tagihan.filter((d) => !d.status).length;
 
   const tagihanCards = [
-  { 
-    title: "Total Tagihan", 
-    value: `Rp ${totalTagihan.toLocaleString("id-ID")}`, 
-    bgColor: "bg-purple-500", 
-    icon: "ri-file-list-3-line" 
-  },
-  { 
-    title: "Sudah Lunas", 
-    value: sudahBayar, 
-    bgColor: "bg-green-600", 
-    icon: "ri-checkbox-circle-line" 
-  },
-  { 
-    title: "Belum Lunas", 
-    value: belumBayar, 
-    bgColor: "bg-red-600", 
-    icon: "ri-close-circle-line" 
-  },
-];
+    {
+      title: "Total Tagihan",
+      value: `Rp ${totalTagihan.toLocaleString("id-ID")}`,
+      bgColor: "bg-purple-500",
+      icon: "ri-file-list-3-line",
+    },
+    {
+      title: "Sudah Lunas",
+      value: sudahBayar,
+      bgColor: "bg-green-600",
+      icon: "ri-checkbox-circle-line",
+    },
+    {
+      title: "Belum Lunas",
+      value: belumBayar,
+      bgColor: "bg-red-600",
+      icon: "ri-close-circle-line",
+    },
+  ];
 
-  const siswaData = kategoridata.filter(d => d.kategori === "Siswa");
-  const guruData = kategoridata.filter(d => d.kategori === "Guru");
-  const karyawanData = kategoridata.filter(d => d.kategori === "Karyawan");
+  const siswaData = kategoridata.filter((d) => d.kategori === "Siswa");
+  const guruData = kategoridata.filter((d) => d.kategori === "Guru");
+  const karyawanData = kategoridata.filter((d) => d.kategori === "Karyawan");
 
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidnav />
-      <div className={`flex-1 p-8 ml-56 transition-all ${showContent ? "opacity-100 translate-y-0 duration-1000" : "opacity-0 translate-y-4"}`}>
+      <div
+        className={`flex-1 p-8 ml-56 transition-all ${
+          showContent
+            ? "opacity-100 translate-y-0 duration-1000"
+            : "opacity-0 translate-y-4"
+        }`}
+      >
         <h1 className="text-3xl font-bold mb-6 flex items-center gap-2">
           <i className="ri-dashboard-line text-3xl"></i>
           Dashboard Sekolah
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6 mb-6 gap-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6 mb-6">
           {kategoriCards.map((card, index) => (
-            <div key={index} className={`${card.bgColor} p-6 rounded-xl shadow-lg text-center hover:shadow-xl hover:scale-[1.03] transition-transform duration-300 ${cardAnimationClasses(index, showContent)}`}>
+            <div
+              key={index}
+              className={`${card.bgColor} p-6 rounded-xl shadow-lg text-center hover:shadow-xl hover:scale-[1.03] transition-transform duration-300 ${cardAnimationClasses(
+                index,
+                showContent
+              )}`}
+            >
               <div className="flex justify-center mb-2">
                 <i className={`${card.icon} text-white text-4xl`}></i>
               </div>
-              <h3 className="text-lg font-semibold text-white">{card.title}</h3>
+              <h3 className="text-lg font-semibold text-white">
+                {card.title}
+              </h3>
               <p className="text-2xl font-bold text-white">{card.value}</p>
             </div>
           ))}
@@ -116,11 +140,19 @@ const belumBayar = tagihan.filter((d) => !d.status).length;
 
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6 mb-8">
           {tagihanCards.map((card, index) => (
-            <div key={index} className={`${card.bgColor} p-6 rounded-xl shadow-lg text-center hover:shadow-xl hover:scale-[1.03] transition-transform duration-300 ${cardAnimationClasses(index + 3, showContent)}`}>
+            <div
+              key={index}
+              className={`${card.bgColor} p-6 rounded-xl shadow-lg text-center hover:shadow-xl hover:scale-[1.03] transition-transform duration-300 ${cardAnimationClasses(
+                index + 3,
+                showContent
+              )}`}
+            >
               <div className="flex justify-center mb-2">
                 <i className={`${card.icon} text-white text-4xl`}></i>
               </div>
-              <h3 className="text-lg font-semibold text-white">{card.title}</h3>
+              <h3 className="text-lg font-semibold text-white">
+                {card.title}
+              </h3>
               <p className="text-2xl font-bold text-white">{card.value}</p>
             </div>
           ))}
@@ -130,6 +162,52 @@ const belumBayar = tagihan.filter((d) => !d.status).length;
         <Table title="Tabel Guru" data={guruData} headerColor="from-blue-300 to-blue-400" />
         <Table title="Tabel Karyawan" data={karyawanData} headerColor="from-yellow-300 to-yellow-400" />
         <Table title="Tabel Tagihan" data={tagihan} tagihanTable headerColor="from-emerald-300 to-emerald-400" />
+
+        <div className="bg-white p-6 rounded-lg shadow-xl mb-8">
+          <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
+            <i className="ri-file-list-3-line text-emerald-600 text-xl"></i>
+            Tabel Presensi
+          </h2>
+
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-emerald-300">
+                  <th className="p-2">No</th>
+                  <th className="p-2">Nama</th>
+                  <th className="p-2">Kategori</th>
+                  <th className="p-2">Tanggal</th>
+                  <th className="p-2">Status</th>
+                  <th className="p-2">Jam Masuk</th>
+                  <th className="p-2">Jam Pulang</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {presensi.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="text-center p-4">
+                      Tidak ada presensi ditemukan.
+                    </td>
+                  </tr>
+                ) : (
+                  presensi.map((item, i) => (
+                    <tr key={item.id} className="text-center">
+                      <td className="p-2">{i + 1}</td>
+                      <td className="p-2 text-left">{item.nama}</td>
+                      <td className="p-2">{item.kategori}</td>
+                      <td className="p-2">{item.tanggal}</td>
+                      <td className="p-2">{item.status || "-"}</td>
+                      <td className="p-2">{item.jam_masuk}</td>
+                      <td className="p-2">{item.jam_pulang || "-"}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
   );

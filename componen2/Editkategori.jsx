@@ -20,12 +20,10 @@ function Editkategori() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ambil data detail yang mau diedit
     axios.get(`http://localhost:5000/masterdata/${id}`).then((res) => {
       setForm(res.data);
     });
 
-    // ambil pilihan kelas/jurusan
     axios.get("http://localhost:5000/kelas").then((res) => setKelasList(res.data));
 
     setTimeout(() => setLoading(false), 300);

@@ -4,18 +4,11 @@ import Swal from "sweetalert2";
 import Sidnav from "../componen/Sidnav";
 
 function Presensi() {
-  const [level, setLevel] = useState("");
-  const [nama, setNama] = useState("");
-
-  const [kategoriData, setKategoriData] = useState([]);
   const [masterData, setMasterData] = useState([]);
   const [presensiData, setPresensiData] = useState([]);
+  const [filter, setFilter] = useState("masuk"); // 🔥 FILTER BARU
 
   useEffect(() => {
-    axios.get("http://localhost:5000/kategori").then((res) => {
-      setKategoriData(res.data);
-    });
-
     axios.get("http://localhost:5000/masterdata").then((res) => {
       setMasterData(res.data);
     });
@@ -29,59 +22,16 @@ function Presensi() {
     });
   };
 
-  const filteredNama = masterData.filter(
-    (m) => m.kategori?.toLowerCase() === level.toLowerCase()
-  );
-
-  const handleSubmit = async () => {
-    if (!level || !nama) {
-      Swal.fire({
-        icon: "warning",
-        title: "Gagal!",
-        text: "Level dan Nama harus dipilih!",
-      });
-      return;
-    }
-
-    const selected = masterData.find(
-      (m) =>
-        m.nama?.toLowerCase() === nama.toLowerCase() &&
-        m.kategori?.toLowerCase() === level.toLowerCase()
-    );
-
-    if (!selected) {
-      Swal.fire({
-        icon: "error",
-        title: "Data Tidak Ditemukan",
-        text: "Pastikan nama dan level sesuai masterdata!",
-      });
-      return;
-    }
-
-    const body = {
-      nama: selected.nama,
-      kategori: selected.kategori,
-      rfid: selected.rfid,     // ✅ AMBIL RFID DARI MASTERDATA
-      tanggal: new Date().toLocaleDateString("id-ID"),
-      jam_masuk: "-",
-      jam_pulang: "-",
-      status: "-",
-      keterangan: "-"
-    };
-
-    await axios.post("http://localhost:5000/presensi", body);
-
-    Swal.fire({
-      icon: "success",
-      title: "Data Ditambahkan",
-      text: `${selected.nama} siap untuk presensi.`,
-      timer: 2000,
-    });
-
-    setLevel("");
-    setNama("");
-    getPresensi();
-  };
+  // ============================
+  // 🔥 FILTER DATA PRESENSI
+  // ============================
+  const filteredData = presensiData.filter((item) => {
+    if (filter === "masuk") return true; // tampilkan semua (default)
+    if (filter === "izin") return item.status === "izin";
+    if (filter === "pulang")
+      return item.jam_pulang !== "-" && item.jam_pulang !== "";
+    return true;
+  });
 
   const handleMasuk = async (item) => {
     if (item.status === "izin") {
@@ -111,7 +61,7 @@ function Presensi() {
       await axios.patch(`http://localhost:5000/presensi/${item.id}`, {
         jam_masuk: jamMasuk,
         status: "hadir",
-        keterangan: "-"
+        keterangan: "-",
       });
 
       Swal.fire({
@@ -137,7 +87,7 @@ function Presensi() {
         jam_masuk: "-",
         jam_pulang: "-",
         status: "izin",
-        keterangan: ket.value
+        keterangan: ket.value,
       });
 
       Swal.fire({
@@ -199,60 +149,41 @@ function Presensi() {
     <div className="flex bg-gray-100">
       <Sidnav />
 
-      <div className="flex-1 p-8 ml-56 transition-all">
+      <div className="flex-1 p-8 ml-54 transition-all">
         <div className="flex justify-between items-center bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow mb-6">
           <h1 className="text-2xl font-bold flex items-center gap-2">
             <i className="ri-database-2-fill"></i> Presensi Sekolah
           </h1>
         </div>
 
-        {/* FORM */}
-        <div className="bg-white rounded-xl shadow p-12 w-full mx-auto">
-          <label className="font-semibold">Pilih Level</label>
-          <select
-            className="border p-3 w-full rounded mt-1"
-            value={level}
-            onChange={(e) => {
-              setLevel(e.target.value);
-              setNama("");
-            }}
-          >
-            <option value="">Pilih Level</option>
-            {kategoriData.map((a) => (
-              <option key={a.id} value={a.nama}>
-                {a.nama}
-              </option>
-            ))}
-          </select>
-
-          {level && (
-            <>
-              <label className="font-semibold mt-4 block">Pilih Nama</label>
-              <select
-                className="border p-3 w-full rounded mt-1"
-                value={nama}
-                onChange={(e) => setNama(e.target.value)}
-              >
-                <option value="">Pilih Nama</option>
-                {filteredNama.map((a) => (
-                  <option key={a.id} value={a.nama}>
-                    {a.nama}
-                  </option>
-                ))}
-              </select>
-            </>
-          )}
-
-          <button
-            className="bg-blue-600 text-white px-6 py-2 mt-5 rounded hover:bg-blue-700 w-full"
-            onClick={handleSubmit}
-          >
-            Simpan Presensi
-          </button>
-        </div>
-
-        {/* TABEL */}
         <div className="mt-10 bg-white p-6 rounded-xl shadow">
+          
+          <div className="flex gap-3 mb-6">
+
+  <button
+    onClick={() => window.location.href = "/presensi-masuk"}
+    className="px-4 py-2 rounded bg-emerald-500 text-white border border-emerald-500 font-medium hover:bg-emerald-600"
+  >
+    Presensi Masuk
+  </button>
+
+  <button
+    onClick={() => window.location.href = "/presensi-izin"}
+    className="px-4 py-2 rounded bg-yellow-500 text-white border border-yellow-500 font-medium hover:bg-yellow-600"
+  >
+    Presensi Izin
+  </button>
+
+  <button
+    onClick={() => window.location.href = "/presensi-pulang"}
+    className="px-4 py-2 rounded bg-red-500 text-white border border-red-500 font-medium hover:bg-red-600"
+  >
+    Presensi Pulang
+  </button>
+
+</div>
+
+
           <h2 className="text-xl font-bold mb-4">Data Presensi</h2>
 
           <table className="w-full">
@@ -261,35 +192,28 @@ function Presensi() {
                 <th className="p-2">No</th>
                 <th className="p-2">Nama</th>
                 <th className="p-2">Kategori</th>
-                <th className="p-2">RFID</th> {/* ✅ TAMBAH KOLOM */}
+                <th className="p-2">RFID</th>
                 <th className="p-2">Tanggal</th>
                 <th className="p-2">Status</th>
-                <th className="p-2 text-nowrap">Jam Masuk</th>
-                <th className="p-2 text-nowrap">Jam Pulang</th>
+                <th className="p-2">Jam Masuk</th>
+                <th className="p-2">Jam Pulang</th>
                 <th className="p-2">Aksi</th>
               </tr>
             </thead>
 
             <tbody>
-              {presensiData.map((item, index) => (
+              {filteredData.map((item, index) => (
                 <tr key={item.id}>
                   <td className="p-2">{index + 1}</td>
                   <td className="p-2 text-nowrap">{item.nama}</td>
                   <td className="p-2 text-center">{item.kategori}</td>
-                  <td className="p-2">{item.rfid}</td> {/* ✅ TAMPILKAN RFID */}
+                  <td className="p-2">{item.rfid}</td>
                   <td className="p-2 text-center">{item.tanggal}</td>
-                  <td className="p-2 text-center">
-                    {item.status || "-"}
-                  </td>
+                  <td className="p-2 text-center">{item.status || "-"}</td>
                   <td className="p-2 text-center">{item.jam_masuk}</td>
-                  <td className="p-2 text-center">
-                    {item.jam_pulang || "-"}
-                  </td>
+                  <td className="p-2 text-center">{item.jam_pulang || "-"}</td>
 
-                  {/* AKSI */}
                   <td className="p-2 flex gap-2">
-
-                    {/* MASUK */}
                     <button
                       disabled={
                         item.status === "izin" ||
@@ -307,7 +231,6 @@ function Presensi() {
                       Masuk
                     </button>
 
-                    {/* PULANG */}
                     <button
                       disabled={
                         item.status === "izin" ||
@@ -326,27 +249,24 @@ function Presensi() {
                       Pulang
                     </button>
 
-                    {/* HAPUS */}
                     <button
                       className="bg-red-600 text-white px-3 py-1 rounded"
                       onClick={() => handleDelete(item.id)}
                     >
                       Hapus
                     </button>
-
                   </td>
                 </tr>
               ))}
 
               {presensiData.length === 0 && (
                 <tr>
-                  <td colSpan="8" className="text-center p-4 text-gray-500">
+                  <td colSpan="9" className="text-center p-4 text-gray-500">
                     Belum ada presensi.
                   </td>
                 </tr>
               )}
             </tbody>
-
           </table>
         </div>
       </div>

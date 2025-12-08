@@ -98,6 +98,46 @@
       "kategori": "Siswa",
       "jabatan": "X DKV",
       "rfid": "2069745276"
+    },
+    {
+      "id": "c9ca",
+      "nama": "Darren sefhiros jacobson",
+      "email": "seft@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X TKJ",
+      "rfid": "7991784488"
+    },
+    {
+      "id": "ed02",
+      "nama": "Bibir gajah",
+      "email": "asaasa@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru informatika",
+      "rfid": "1862592342"
+    },
+    {
+      "id": "06da",
+      "nama": "supatman saputra",
+      "email": "putra@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "security",
+      "rfid": "9680626418"
+    },
+    {
+      "id": "741a",
+      "nama": "Tino shade",
+      "email": "Tino@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru informatika",
+      "rfid": "4061082560"
+    },
+    {
+      "id": "3991",
+      "nama": "mia luna tearmoon",
+      "email": "luna@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X RPL",
+      "rfid": "3676166415"
     }
   ],
   "kelas": [
@@ -164,24 +204,57 @@
   ],
   "presensi": [
     {
-      "id": "e56c",
-      "nama": "Adrean syahputra",
+      "id": "f478",
+      "nama": "Narendra sakti widhitama",
       "kategori": "Siswa",
-      "rfid": "8167801850",
-      "tanggal": "5/12/2025",
-      "jam_masuk": "08.37.41",
+      "rfid": "2069745276",
+      "tanggal": "8/12/2025",
+      "jam_masuk": "08.02.53",
+      "jam_pulang": "09.54.08",
+      "status": "hadir",
+      "keterangan": "-"
+    },
+    {
+      "id": "3fb3",
+      "nama": "mia luna tearmoon",
+      "kategori": "Siswa",
+      "rfid": "3676166415",
+      "tanggal": "8/12/2025",
+      "jam_masuk": "08.03.01",
       "jam_pulang": "-",
       "status": "hadir",
       "keterangan": "-"
     },
     {
-      "id": "2e9a",
-      "nama": "Narendra sakti widhitama",
-      "kategori": "Siswa",
-      "rfid": "2069745276",
-      "tanggal": "5/12/2025",
-      "jam_masuk": "09.09.16",
+      "id": "ff1a",
+      "nama": "Tino shade",
+      "kategori": "Guru",
+      "rfid": "4061082560",
+      "tanggal": "8/12/2025",
+      "jam_masuk": "08.05.33",
       "jam_pulang": "-",
+      "status": "hadir",
+      "keterangan": "-"
+    },
+    {
+      "id": "8917",
+      "nama": "Darren sefhiros jacobson",
+      "kategori": "Siswa",
+      "rfid": "7991784488",
+      "tanggal": "8/12/2025",
+      "jam_masuk": "-",
+      "jam_pulang": "-",
+      "status": "izin",
+      "keterangan": "sakit"
+    },
+    {
+      "id": "7f54",
+      "nama": "Bibir gajah",
+      "kategori": "Guru",
+      "rfid": "1862592342",
+      "tanggal": "8/12/2025",
+      "jam_masuk": "09.59.38",
+      "jam_pulang": "09.59.47",
       "status": "hadir",
       "keterangan": "-"
     }

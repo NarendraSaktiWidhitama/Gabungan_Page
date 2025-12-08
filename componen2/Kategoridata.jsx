@@ -101,7 +101,6 @@ function Kategoridata() {
       <Sidnav />
 
       <div className={`flex-1 p-8 ml-56 ${baseAnimation}`}>
-        {/* Header */}
         <div className="flex justify-between items-center mb-6 bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow">
           <h1 className="text-2xl font-semibold flex items-center gap-2">
             <i className="ri-folder-user-fill"></i> Kategori Data (Level)

@@ -120,7 +120,6 @@ function Editdata() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
 
-            {/* Nama (Tidak bisa diubah) */}
             <input
               name="nama"
               value={form.nama}
@@ -128,7 +127,6 @@ function Editdata() {
               className="w-full border px-4 py-2 bg-gray-100 rounded"
             />
 
-            {/* Email (Tidak bisa diubah) */}
             <input
               name="email"
               value={form.email}
@@ -136,7 +134,6 @@ function Editdata() {
               className="w-full border px-4 py-2 bg-gray-100 rounded"
             />
 
-            {/* Jenis */}
             <select
               name="jenis"
               value={form.jenis}
@@ -152,7 +149,6 @@ function Editdata() {
               ))}
             </select>
 
-            {/* Jumlah */}
             <input
               name="jumlah"
               value={form.jumlah}
@@ -162,7 +158,6 @@ function Editdata() {
               required
             />
 
-            {/* Tanggal */}
             <input
               name="tanggal"
               type="date"

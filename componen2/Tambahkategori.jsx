@@ -20,7 +20,6 @@ function Tambahkategori() {
   const [kelasList, setKelasList] = useState([]);
   const [kategoriList, setKategoriList] = useState([]);
 
-  // 🔥 AUTO GENERATE RFID
   const generateRFID = () => {
     return Math.floor(1000000000 + Math.random() * 9000000000).toString();
   };
@@ -62,7 +61,7 @@ function Tambahkategori() {
       await axios.post("http://localhost:5000/masterdata", {
         ...form,
         jabatan: finalJabatan,
-        rfid: generateRFID(),   // 🔥 WAJIB BIAR KEISI RFID
+        rfid: generateRFID(),
       });
 
       Swal.fire({

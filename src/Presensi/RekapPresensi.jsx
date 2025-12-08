@@ -54,7 +54,7 @@ function RekapPresensi() {
     <div className="flex">
       <Sidnav />
 
-      <div className="ml-64 p-6 w-full">
+      <div className="ml-58 p-6 w-full">
         <div className="flex justify-between items-center bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow mb-6">
           <h1 className="text-2xl font-bold flex items-center gap-2">
             <i className="ri-database-2-fill"></i> Rekap Presensi
