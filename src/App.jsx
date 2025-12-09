@@ -18,7 +18,7 @@ import Presensi from "./Presensi/Presensi";
 import RekapPresensi from "./Presensi/RekapPresensi";
 import PresensiMasuk from "./Presensi/PresensiMasuk";
 import PresensiIzin from "./Presensi/PresensiIzin";
-import PresensiPulang from "./Presensi/PresensiPulang";
+import PresensiKeluar from "./Presensi/PresensiKeluar";
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
       <Route path="/RekapPresensi" element={<RekapPresensi />} />
       <Route path="/presensi-masuk" element={<PresensiMasuk />} />
       <Route path="/presensi-izin" element={<PresensiIzin />} />
-      <Route path="/presensi-pulang" element={<PresensiPulang />} />
+      <Route path="/presensi-keluar" element={<PresensiKeluar />} />
       <Route path="/Masterdata" element={<Masterdata />} />
       <Route path="/edit/:id" element={<Editdata />} />
       <Route path="/editkategori/:id" element={<Editkategori />} />

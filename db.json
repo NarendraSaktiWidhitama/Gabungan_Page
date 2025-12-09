@@ -28,7 +28,7 @@
       "email": "yurawa@gmail.com",
       "jenis": "SPP Bulanan",
       "jumlah": 250000,
-      "tanggal": "2025-12-05",
+      "tanggal": "05-12-2025",
       "status": true,
       "level": "",
       "kelas": ""
@@ -43,25 +43,25 @@
     },
     {
       "nama": "Uang Ujian",
-      "keterangan": "Bayar uang buat mengikuti ujian apapun",
+      "keterangan": "Bayar uang ujian",
       "id": "2",
       "aktif": true
     },
     {
       "nama": "Seragam Sekolah",
-      "keterangan": "Bayar buat pakaian seragam sekolah",
+      "keterangan": "Pakaian seragam sekolah",
       "id": "3",
       "aktif": true
     },
     {
       "nama": "Uang gedung",
-      "keterangan": "Bayar uang gedung setiap awal semester",
+      "keterangan": "Bayar awal semester",
       "id": "ee00",
       "aktif": true
     },
     {
       "nama": "Alat praktek",
-      "keterangan": "untuk praktek disetiap jurusannya",
+      "keterangan": "Untuk praktek jurusan",
       "id": "fab7",
       "aktif": true
     }
@@ -204,57 +204,13 @@
   ],
   "presensi": [
     {
-      "id": "f478",
-      "nama": "Narendra sakti widhitama",
-      "kategori": "Siswa",
-      "rfid": "2069745276",
-      "tanggal": "8/12/2025",
-      "jam_masuk": "08.02.53",
-      "jam_pulang": "09.54.08",
-      "status": "hadir",
-      "keterangan": "-"
-    },
-    {
-      "id": "3fb3",
+      "id": "15de",
       "nama": "mia luna tearmoon",
       "kategori": "Siswa",
       "rfid": "3676166415",
-      "tanggal": "8/12/2025",
-      "jam_masuk": "08.03.01",
+      "tanggal": "9/12/2025",
+      "jam_masuk": "07.53.41",
       "jam_pulang": "-",
-      "status": "hadir",
-      "keterangan": "-"
-    },
-    {
-      "id": "ff1a",
-      "nama": "Tino shade",
-      "kategori": "Guru",
-      "rfid": "4061082560",
-      "tanggal": "8/12/2025",
-      "jam_masuk": "08.05.33",
-      "jam_pulang": "-",
-      "status": "hadir",
-      "keterangan": "-"
-    },
-    {
-      "id": "8917",
-      "nama": "Darren sefhiros jacobson",
-      "kategori": "Siswa",
-      "rfid": "7991784488",
-      "tanggal": "8/12/2025",
-      "jam_masuk": "-",
-      "jam_pulang": "-",
-      "status": "izin",
-      "keterangan": "sakit"
-    },
-    {
-      "id": "7f54",
-      "nama": "Bibir gajah",
-      "kategori": "Guru",
-      "rfid": "1862592342",
-      "tanggal": "8/12/2025",
-      "jam_masuk": "09.59.38",
-      "jam_pulang": "09.59.47",
       "status": "hadir",
       "keterangan": "-"
     }

@@ -4,15 +4,11 @@ import Swal from "sweetalert2";
 import Sidnav from "../componen/Sidnav";
 
 function Presensi() {
-  const [masterData, setMasterData] = useState([]);
   const [presensiData, setPresensiData] = useState([]);
-  const [filter, setFilter] = useState("masuk"); // 🔥 FILTER BARU
+
+  const defaultAvatar = "https://cdn-icons-png.flaticon.com/512/848/848006.png";
 
   useEffect(() => {
-    axios.get("http://localhost:5000/masterdata").then((res) => {
-      setMasterData(res.data);
-    });
-
     getPresensi();
   }, []);
 
@@ -20,114 +16,6 @@ function Presensi() {
     axios.get("http://localhost:5000/presensi").then((res) => {
       setPresensiData(res.data);
     });
-  };
-
-  // ============================
-  // 🔥 FILTER DATA PRESENSI
-  // ============================
-  const filteredData = presensiData.filter((item) => {
-    if (filter === "masuk") return true; // tampilkan semua (default)
-    if (filter === "izin") return item.status === "izin";
-    if (filter === "pulang")
-      return item.jam_pulang !== "-" && item.jam_pulang !== "";
-    return true;
-  });
-
-  const handleMasuk = async (item) => {
-    if (item.status === "izin") {
-      Swal.fire("Sudah Izin", "Tidak bisa presensi masuk.", "info");
-      return;
-    }
-
-    if (item.jam_masuk !== "-" && item.jam_masuk !== "") {
-      Swal.fire({
-        icon: "info",
-        title: "Sudah Presensi Masuk",
-        text: `${item.nama} sudah mencatat jam masuk.`,
-      });
-      return;
-    }
-
-    const result = await Swal.fire({
-      title: "Pilih Jenis Presensi",
-      showDenyButton: true,
-      confirmButtonText: "Masuk",
-      denyButtonText: "Izin",
-    });
-
-    if (result.isConfirmed) {
-      const jamMasuk = new Date().toLocaleTimeString("id-ID");
-
-      await axios.patch(`http://localhost:5000/presensi/${item.id}`, {
-        jam_masuk: jamMasuk,
-        status: "hadir",
-        keterangan: "-",
-      });
-
-      Swal.fire({
-        icon: "success",
-        title: "Presensi Masuk",
-        text: `${item.nama} masuk pada ${jamMasuk}`,
-      });
-
-      getPresensi();
-    }
-
-    if (result.isDenied) {
-      const ket = await Swal.fire({
-        title: "Masukkan Keterangan Izin",
-        input: "text",
-        inputPlaceholder: "Contoh: Sakit, Ada keperluan...",
-        showCancelButton: true,
-      });
-
-      if (!ket.value) return;
-
-      await axios.patch(`http://localhost:5000/presensi/${item.id}`, {
-        jam_masuk: "-",
-        jam_pulang: "-",
-        status: "izin",
-        keterangan: ket.value,
-      });
-
-      Swal.fire({
-        icon: "success",
-        title: "Izin Dicatat",
-        text: `${item.nama} izin: ${ket.value}`,
-      });
-
-      getPresensi();
-    }
-  };
-
-  const handlePulang = async (item) => {
-    if (item.status === "izin") {
-      Swal.fire("Tidak Bisa", "Hari ini sudah izin.", "info");
-      return;
-    }
-
-    if (item.jam_pulang !== "-" && item.jam_pulang !== "") {
-      Swal.fire({
-        icon: "info",
-        title: "Sudah Pulang",
-        text: `${item.nama} sudah memiliki jam pulang.`,
-      });
-      return;
-    }
-
-    const jamPulang = new Date().toLocaleTimeString("id-ID");
-
-    await axios.patch(`http://localhost:5000/presensi/${item.id}`, {
-      jam_pulang: jamPulang,
-    });
-
-    Swal.fire({
-      icon: "success",
-      title: "Jam Pulang Dicatat!",
-      text: `${item.nama} pulang pada ${jamPulang}`,
-    });
-
-    getPresensi();
   };
 
   const handleDelete = async (id) => {
@@ -150,6 +38,7 @@ function Presensi() {
       <Sidnav />
 
       <div className="flex-1 p-8 ml-54 transition-all">
+
         <div className="flex justify-between items-center bg-gradient-to-r from-emerald-300 to-emerald-400 px-5 py-4 rounded-md shadow mb-6">
           <h1 className="text-2xl font-bold flex items-center gap-2">
             <i className="ri-database-2-fill"></i> Presensi Sekolah
@@ -157,32 +46,29 @@ function Presensi() {
         </div>
 
         <div className="mt-10 bg-white p-6 rounded-xl shadow">
-          
+
           <div className="flex gap-3 mb-6">
+            <button
+              onClick={() => (window.location.href = "/presensi-masuk")}
+              className="px-4 py-2 rounded bg-emerald-500 text-white font-medium hover:bg-emerald-600"
+            >
+              Presensi Masuk
+            </button>
 
-  <button
-    onClick={() => window.location.href = "/presensi-masuk"}
-    className="px-4 py-2 rounded bg-emerald-500 text-white border border-emerald-500 font-medium hover:bg-emerald-600"
-  >
-    Presensi Masuk
-  </button>
+            <button
+              onClick={() => (window.location.href = "/presensi-izin")}
+              className="px-4 py-2 rounded bg-yellow-500 text-white font-medium hover:bg-yellow-600"
+            >
+              Presensi Izin
+            </button>
 
-  <button
-    onClick={() => window.location.href = "/presensi-izin"}
-    className="px-4 py-2 rounded bg-yellow-500 text-white border border-yellow-500 font-medium hover:bg-yellow-600"
-  >
-    Presensi Izin
-  </button>
-
-  <button
-    onClick={() => window.location.href = "/presensi-pulang"}
-    className="px-4 py-2 rounded bg-red-500 text-white border border-red-500 font-medium hover:bg-red-600"
-  >
-    Presensi Pulang
-  </button>
-
-</div>
-
+            <button
+              onClick={() => (window.location.href = "/presensi-keluar")}
+              className="px-4 py-2 rounded bg-red-500 text-white font-medium hover:bg-red-600"
+            >
+              Presensi Keluar
+            </button>
+          </div>
 
           <h2 className="text-xl font-bold mb-4">Data Presensi</h2>
 
@@ -190,6 +76,7 @@ function Presensi() {
             <thead>
               <tr className="bg-emerald-300">
                 <th className="p-2">No</th>
+                <th className="p-2">Foto</th>
                 <th className="p-2">Nama</th>
                 <th className="p-2">Kategori</th>
                 <th className="p-2">RFID</th>
@@ -202,53 +89,26 @@ function Presensi() {
             </thead>
 
             <tbody>
-              {filteredData.map((item, index) => (
+              {presensiData.map((item, index) => (
                 <tr key={item.id}>
-                  <td className="p-2">{index + 1}</td>
-                  <td className="p-2 text-nowrap">{item.nama}</td>
+                  <td className="p-2 text-center">{index + 1}</td>
+
+                  <td className="p-2 text-center">
+                    <img
+                      src={item.foto ? item.foto : defaultAvatar}
+                      className="w-10 h-10 rounded-full object-cover mx-auto"
+                    />
+                  </td>
+
+                  <td className="p-2">{item.nama}</td>
                   <td className="p-2 text-center">{item.kategori}</td>
-                  <td className="p-2">{item.rfid}</td>
+                  <td className="p-2 text-center">{item.rfid}</td>
                   <td className="p-2 text-center">{item.tanggal}</td>
-                  <td className="p-2 text-center">{item.status || "-"}</td>
+                  <td className="p-2 text-center">{item.status}</td>
                   <td className="p-2 text-center">{item.jam_masuk}</td>
-                  <td className="p-2 text-center">{item.jam_pulang || "-"}</td>
+                  <td className="p-2 text-center">{item.jam_pulang}</td>
 
-                  <td className="p-2 flex gap-2">
-                    <button
-                      disabled={
-                        item.status === "izin" ||
-                        (item.jam_masuk !== "-" && item.jam_masuk !== "")
-                      }
-                      onClick={() => handleMasuk(item)}
-                      className={`px-3 py-1 rounded text-white ${
-                        item.status === "izin"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : item.jam_masuk !== "-"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-blue-500"
-                      }`}
-                    >
-                      Masuk
-                    </button>
-
-                    <button
-                      disabled={
-                        item.status === "izin" ||
-                        item.jam_masuk === "-" ||
-                        item.jam_pulang !== "-"
-                      }
-                      onClick={() => handlePulang(item)}
-                      className={`px-3 py-1 rounded text-white ${
-                        item.status === "izin"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : item.jam_pulang !== "-"
-                          ? "bg-gray-400 cursor-not-allowed"
-                          : "bg-green-500"
-                      }`}
-                    >
-                      Pulang
-                    </button>
-
+                  <td className="p-2 text-center">
                     <button
                       className="bg-red-600 text-white px-3 py-1 rounded"
                       onClick={() => handleDelete(item.id)}
@@ -261,13 +121,14 @@ function Presensi() {
 
               {presensiData.length === 0 && (
                 <tr>
-                  <td colSpan="9" className="text-center p-4 text-gray-500">
+                  <td colSpan="10" className="text-center p-4 text-gray-500">
                     Belum ada presensi.
                   </td>
                 </tr>
               )}
             </tbody>
           </table>
+
         </div>
       </div>
     </div>
