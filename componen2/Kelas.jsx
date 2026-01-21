@@ -3,6 +3,7 @@ import axios from "axios";
 import Sidnav from "../src/componen/Sidnav";
 import Swal from "sweetalert2";
 import gambar from "../public/Logo.png";
+import { BASE_URL } from "../src/config/api";
 
 function Kelas() {
   const [kelasData, setKelasData] = useState([]);
@@ -19,7 +20,8 @@ const [showContent, setShowContent] = useState(false);
 
   const loadData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/kelas");
+      const res = await axios.get(`${BASE_URL}/api/kelas`);
+      setKelasData(res.data);
       setKelasData(res.data.reverse());
     } finally {
       setTimeout(() => {
@@ -47,7 +49,7 @@ const [showContent, setShowContent] = useState(false);
 
   const openEdit = (item) => {
     setEditId(item.id);
-    setKelas(item.kelas);
+    setKelas(item.tingkat);
     setJurusan(item.jurusan);
     setShowModal(true);
   };
@@ -58,11 +60,20 @@ const [showContent, setShowContent] = useState(false);
     }
 
     if (editId === null) {
-      await axios.post("http://localhost:5000/kelas", { kelas, jurusan });
-      Swal.fire("Berhasil", "Data kelas ditambahkan", "success");
+      await axios.post(`${BASE_URL}/api/kelas`, {
+        tingkat: kelas,
+        jurusan: jurusan,
+        aktif: true
+      });
+
+
     } else {
-      await axios.put(`http://localhost:5000/kelas/${editId}`, { kelas, jurusan });
-      Swal.fire("Berhasil", "Data kelas diupdate", "success");
+      await axios.put(`${BASE_URL}/api/kelas/${editId}`, {
+        tingkat: kelas,
+        jurusan: jurusan
+      });
+
+
     }
 
     setShowModal(false);
@@ -80,7 +91,7 @@ const [showContent, setShowContent] = useState(false);
 
     if (!ask.isConfirmed) return;
 
-    await axios.delete(`http://localhost:5000/kelas/${id}`);
+    await axios.delete(`${BASE_URL}/api/kelas/${id}`);
     loadData();
     Swal.fire("Terhapus", "Data berhasil dihapus", "success");
   };
@@ -131,7 +142,7 @@ const [showContent, setShowContent] = useState(false);
               {kelasData.map((d, i) => (
                 <tr key={d.id} className={`hover:bg-gray-50 transition-all duration-500 ${baseAnimation}`}>
                   <td className="p-2">{i + 1}</td>
-                  <td className="p-2">{d.kelas}</td>
+                  <td className="p-2">{d.tingkat}</td>
                   <td className="p-2">{d.jurusan}</td>
                   <td className="p-2 text-center">
                     <button onClick={() => openEdit(d)} className="mr-3">✏️</button>

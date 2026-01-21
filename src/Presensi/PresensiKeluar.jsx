@@ -10,7 +10,6 @@ function PresensiKeluar() {
   const [nama, setNama] = useState("Pengguna");
   const [waktu, setWaktu] = useState("");
 
-  // JAM
   useEffect(() => {
     const timer = setInterval(() => {
       setWaktu(new Date().toLocaleTimeString("id-ID"));
@@ -39,7 +38,6 @@ function PresensiKeluar() {
 
       const today = new Date().toLocaleDateString("id-ID");
 
-      // cari presensi hari ini
       const presensi = await axios.get(
         `http://localhost:5000/presensi?rfid=${value}&tanggal=${today}`
       );
@@ -56,7 +54,6 @@ function PresensiKeluar() {
         return;
       }
 
-      // catat pulang
       const jamPulang = new Date().toLocaleTimeString("id-ID");
 
       await axios.patch(`http://localhost:5000/presensi/${data.id}`, {
@@ -64,7 +61,7 @@ function PresensiKeluar() {
       });
 
       alert("Presensi Pulang Berhasil!");
-      navigate("/Presensi");
+      navigate("/RekapPresensi");
     }
   };
 

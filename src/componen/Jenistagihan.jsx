@@ -3,6 +3,7 @@ import axios from "axios";
 import Sidnav from "./Sidnav";
 import Swal from "sweetalert2";
 import gambar from "../assets/Logo.png"
+import { BASE_URL } from "../config/api";
 
 function Jenistagihan() {
   const [jenis, setJenis] = useState([]);
@@ -17,7 +18,7 @@ function Jenistagihan() {
   const load = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/jenis");
+      const res = await axios.get(`${BASE_URL}/api/jenis-tagihan`);
       setJenis(res.data);
 
       setTimeout(() => {
@@ -35,36 +36,44 @@ function Jenistagihan() {
 }, []);
 
   const handleSave = async () => {
-    if (!form.nama.trim()) {
-      Swal.fire("Oops", "Nama jenis wajib diisi!", "warning");
-      return;
+  if (!form.nama.trim()) {
+    Swal.fire("Oops", "Nama jenis wajib diisi!", "warning");
+    return;
+  }
+
+  try {
+    if (editMode) {
+      const res = await axios.put(
+  `${BASE_URL}/api/jenis-tagihan/${selectedId}`,
+  form
+);
+
+      setJenis(
+        jenis.map((j) =>
+          j.id === selectedId ? res.data : j
+        )
+      );
+
+      Swal.fire("Berhasil!", "Jenis tagihan berhasil diperbarui", "success");
+    } else {
+      const res = await axios.post(
+  `${BASE_URL}/api/jenis-tagihan`,
+  { ...form, aktif: true }
+);
+
+      setJenis([...jenis, res.data]);
+      Swal.fire("Berhasil!", "Jenis tagihan berhasil ditambahkan", "success");
     }
 
-    try {
-      if (editMode) {
-        await axios.put(`http://localhost:5000/jenis/${selectedId}`, form);
-        Swal.fire("Berhasil!", "Jenis tagihan berhasil diperbarui", "success");
-        setJenis(
-          jenis.map((j) =>
-            j.id === selectedId ? { ...j, ...form } : j
-          )
-        );
-      } else {
-        const res = await axios.post("http://localhost:5000/jenis", {
-          ...form,
-          aktif: true,
-        });
-        Swal.fire("Berhasil!", "Jenis tagihan berhasil ditambahkan", "success");
-        setJenis([...jenis, res.data]);
-      }
-      setModal(false);
-      setForm({ nama: "", keterangan: "" });
-      setEditMode(false);
-    } catch (err) {
-      Swal.fire("Gagal", "Terjadi kesalahan saat menyimpan data", "error");
-      console.error(err);
-    }
-  };
+    setModal(false);
+    setForm({ nama: "", keterangan: "" });
+    setEditMode(false);
+    setSelectedId(null);
+  } catch (err) {
+    Swal.fire("Gagal", "Terjadi kesalahan saat menyimpan data", "error");
+    console.error(err);
+  }
+};
 
   const handleEdit = (item) => {
     setForm({ nama: item.nama, keterangan: item.keterangan });
@@ -74,36 +83,43 @@ function Jenistagihan() {
   };
 
   const handleToggleAktif = async (item) => {
-    try {
-      const updated = { ...item, aktif: !item.aktif };
-      await axios.put(`http://localhost:5000/jenis/${item.id}`, updated);
-      setJenis(jenis.map((j) => (j.id === item.id ? updated : j)));
-    } catch (err) {
-      Swal.fire("Gagal", "Tidak bisa mengubah status aktif", "error");
-    }
-  };
+  try {
+    const updated = { ...item, aktif: !item.aktif };
+
+    await axios.put(
+  `${BASE_URL}/api/jenis-tagihan/${item.id}`,
+  updated
+);
+
+    setJenis(jenis.map((j) => (j.id === item.id ? updated : j)));
+  } catch (err) {
+    Swal.fire("Gagal", "Tidak bisa mengubah status aktif", "error");
+  }
+};
 
   const handleDelete = async (item) => {
-    const konfirmasi = await Swal.fire({
-      title: "Hapus Jenis Tagihan?",
-      text: `Yakin ingin menghapus "${item.nama}"?`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Ya, hapus!",
-      cancelButtonText: "Batal",
-    });
+  const konfirmasi = await Swal.fire({
+    title: "Hapus Jenis Tagihan?",
+    text: `Yakin ingin menghapus "${item.nama}"?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Ya, hapus!",
+    cancelButtonText: "Batal",
+  });
 
-    if (!konfirmasi.isConfirmed) return;
+  if (!konfirmasi.isConfirmed) return;
 
-    try {
-      await axios.delete(`http://localhost:5000/jenis/${item.id}`);
-      Swal.fire("Terhapus!", "Jenis tagihan berhasil dihapus", "success");
-      setJenis(jenis.filter((j) => j.id !== item.id));
-    } catch (err) {
-      Swal.fire("Gagal", "Tidak bisa menghapus jenis tagihan", "error");
-      console.error(err);
-    }
-  };
+  try {
+    await axios.delete(
+  `${BASE_URL}/api/jenis-tagihan/${item.id}`
+);
+
+    setJenis(jenis.filter((j) => j.id !== item.id));
+    Swal.fire("Terhapus!", "Jenis tagihan berhasil dihapus", "success");
+  } catch (err) {
+    Swal.fire("Gagal", "Tidak bisa menghapus jenis tagihan", "error");
+  }
+};
 
   const mainContentAnimationClass = contentVisible
     ? "opacity-100 transform translate-y-0 transition-all duration-700 ease-out"

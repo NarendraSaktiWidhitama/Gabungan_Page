@@ -24,12 +24,12 @@ function Dashboard() {
         const [resKategoridata, resTagihan, resPresensi] = await Promise.all([
           axios.get("http://localhost:5000/masterdata"),
           axios.get("http://localhost:5000/data"),
-          axios.get("http://localhost:5000/presensi"), // ✅ TAMBAHAN
+          axios.get("http://localhost:5000/presensi"),
         ]);
 
         setKategoridata(resKategoridata.data.reverse());
         setTagihan(resTagihan.data.reverse());
-        setPresensi(resPresensi.data.reverse()); // ✅ TAMBAHAN
+        setPresensi(resPresensi.data.reverse());
       } catch (err) {
         console.error(err);
       } finally {

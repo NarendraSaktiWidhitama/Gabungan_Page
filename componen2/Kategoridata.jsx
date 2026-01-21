@@ -3,6 +3,7 @@ import axios from "axios";
 import Sidnav from "../src/componen/Sidnav";
 import Swal from "sweetalert2";
 import gambar from "../public/Logo.png";
+import { BASE_URL } from "../src/config/api";
 
 function Kategoridata() {
   const [data, setData] = useState([]);
@@ -15,8 +16,9 @@ function Kategoridata() {
 
   const loadData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/kategori");
+      const res = await axios.get(`${BASE_URL}/api/kategori-data`);
       setData(res.data.reverse());
+
     } finally {
       setTimeout(() => {
         setLoading(false);
@@ -52,12 +54,17 @@ function Kategoridata() {
     }
 
     if (editId === null) {
-      await axios.post("http://localhost:5000/kategori", { nama });
-      Swal.fire("Berhasil", "Kategori berhasil ditambahkan", "success");
-    } else {
-      await axios.put(`http://localhost:5000/kategori/${editId}`, { nama });
-      Swal.fire("Berhasil", "Kategori berhasil diupdate", "success");
-    }
+  await axios.post(`${BASE_URL}/api/kategori-data`, {
+    nama: nama,
+    aktif: true
+  });
+  Swal.fire("Berhasil", "Kategori berhasil ditambahkan", "success");
+} else {
+  await axios.put(`${BASE_URL}/api/kategori-data/${editId}`, {
+    nama: nama
+  });
+  Swal.fire("Berhasil", "Kategori berhasil diupdate", "success");
+}
 
     setShowModal(false);
     loadData();
@@ -74,7 +81,7 @@ function Kategoridata() {
 
     if (!ask.isConfirmed) return;
 
-    await axios.delete(`http://localhost:5000/kategori/${id}`);
+    await axios.delete(`${BASE_URL}/api/kategori-data/${id}`);
     loadData();
 
     Swal.fire("Dihapus", "Kategori berhasil dihapus", "success");

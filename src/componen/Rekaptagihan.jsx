@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidnav from "./Sidnav";
+import { BASE_URL } from "../config/api";
 
 function Rekaptagihan() {
   const [data, setData] = useState([]);
@@ -12,9 +13,8 @@ function Rekaptagihan() {
   useEffect(() => {
     const load = async () => {
       try {
-        const r = await axios.get("http://localhost:5000/data");
-        const reversed = [...r.data].reverse();
-        setData(reversed);
+        const res = await axios.get(`${BASE_URL}/keuangan`);
+        setData([...res.data].reverse());
       } catch (err) {
         console.error(err);
       } finally {
@@ -40,25 +40,28 @@ function Rekaptagihan() {
     );
 
   const now = new Date();
+
   const filteredData = data.filter((item) => {
     const t = new Date(item.tanggal);
 
-    // Filter waktu
-    let matchTime = false;
-    if (filter === "harian")
+    let matchTime = true;
+    if (filter === "harian") {
       matchTime = t.toDateString() === now.toDateString();
-    else if (filter === "mingguan")
+    } else if (filter === "mingguan") {
       matchTime =
         t >= new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7);
-    else if (filter === "bulanan")
+    } else if (filter === "bulanan") {
       matchTime =
-        t.getMonth() === now.getMonth() && t.getFullYear() === now.getFullYear();
-    else matchTime = true;
+        t.getMonth() === now.getMonth() &&
+        t.getFullYear() === now.getFullYear();
+    }
 
-    let matchStatus = false;
-    if (filterStatus === "semua") matchStatus = true;
-    else if (filterStatus === "Lunas") matchStatus = item.status === true;
-    else if (filterStatus === "belum") matchStatus = item.status === false;
+    let matchStatus = true;
+    if (filterStatus === "Lunas") {
+      matchStatus = item.status === "LUNAS";
+    } else if (filterStatus === "belum") {
+      matchStatus = item.status === "BELUM LUNAS";
+    }
 
     return matchTime && matchStatus;
   });
@@ -69,7 +72,7 @@ function Rekaptagihan() {
 
       <div
         className={`flex-1 p-8 ml-56 overflow-x-auto transition-all duration-700 
-          ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+        ${showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
       >
         <div className="bg-gradient-to-r from-emerald-300 to-emerald-400 p-4 rounded-lg mb-6 shadow-md">
           <div className="flex items-center gap-3">
@@ -110,23 +113,25 @@ function Rekaptagihan() {
           <table className="w-full text-[15px] border-collapse">
             <thead className="bg-gradient-to-r from-emerald-300 to-emerald-300">
               <tr>
-                <th className="py-2 px-3 w-[40px]">No</th>
-                <th className="py-2 px-3 w-[180px]">Nama</th>
-                <th className="py-2 px-3 w-[220px]">Email</th>
-                <th className="py-2 px-3 w-[130px]">Jenis</th>
-                <th className="py-2 px-3 w-[110px]">Jumlah</th>
-                <th className="py-2 px-3 w-[110px]">Tanggal</th>
-                <th className="py-2 px-3 w-[120px]">Status</th>
+                <th className="py-2 px-3">No</th>
+                <th className="py-2 px-3">Nama</th>
+                <th className="py-2 px-3">Email</th>
+                <th className="py-2 px-3">Jenis</th>
+                <th className="py-2 px-3">Jumlah</th>
+                <th className="py-2 px-3">Tanggal</th>
+                <th className="py-2 px-3">Status</th>
               </tr>
             </thead>
 
             <tbody>
               {filteredData.map((d, i) => (
-                <tr key={d.id} className="hover:bg-gray-50 transition-all duration-500">
+                <tr key={d.id} className="hover:bg-gray-50">
                   <td className="py-2 px-3 text-right">{i + 1}</td>
-                  <td className="py-2 px-3 text-left">{d.nama}</td>
-                  <td className="py-2 px-3 text-left">{d.email}</td>
-                  <td className="py-2 px-3 text-center">{d.jenis}</td>
+                  <td className="py-2 px-3">{d.nama}</td>
+                  <td className="py-2 px-3">{d.email}</td>
+                  <td className="py-2 px-3 text-center">
+                    {d.jenisTagihan?.nama || "-"}
+                  </td>
                   <td className="py-2 px-3 text-right">
                     Rp {d.jumlah?.toLocaleString()}
                   </td>
@@ -135,20 +140,21 @@ function Rekaptagihan() {
                       ? new Date(d.tanggal).toLocaleDateString("id-ID")
                       : "-"}
                   </td>
-
                   <td
                     className={`py-2 px-3 text-center font-semibold ${
-                      d.status ? "text-green-600" : "text-red-500"
+                      d.status === "LUNAS"
+                        ? "text-green-600"
+                        : "text-red-500"
                     }`}
                   >
-                    {d.status ? "Lunas" : "Belum Lunas"}
+                    {d.status === "LUNAS" ? "Lunas" : "Belum Lunas"}
                   </td>
                 </tr>
               ))}
 
               {filteredData.length === 0 && (
                 <tr>
-                  <td colSpan="8" className="p-6 text-gray-500 text-center">
+                  <td colSpan="7" className="p-6 text-gray-500 text-center">
                     Tidak ada data
                   </td>
                 </tr>

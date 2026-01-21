@@ -58,7 +58,7 @@ function PresensiIzin() {
       });
 
       Swal.fire("Berhasil!", "Izin telah dicatat.", "success");
-      navigate("/Presensi");
+      navigate("/RekapPresensi");
     }
   };
 

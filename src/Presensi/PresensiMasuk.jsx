@@ -46,7 +46,7 @@ function PresensiMasuk() {
         });
 
         alert("Presensi Masuk Berhasil!");
-        navigate("/Presensi");
+        navigate("/RekapPresensi");
       } else {
         alert("RFID tidak terdaftar!");
       }
@@ -67,14 +67,14 @@ function PresensiMasuk() {
       <div className="bg-[#1f1f1f] border border-teal-400 rounded-xl shadow-xl px-10 py-8 w-[550px] text-white relative">
 
         <h1 className="text-center text-3xl font-bold tracking-wider">
-          PRESENSI <span className="text-teal-300">MASUK</span>
+          PRESENSI <span className="text-emerald-300">MASUK</span>
         </h1>
 
         <h2 className="text-center mt-3 text-xl font-semibold tracking-wide">
           PRESENSI SISWA
         </h2>
 
-        <p className="text-center text-4xl font-bold mt-4 text-teal-300">
+        <p className="text-center text-4xl font-bold mt-4 text-emerald-300">
           {waktu}
         </p>
 

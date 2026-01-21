@@ -14,7 +14,6 @@ import Rekaptagihan from "./componen/Rekaptagihan"
 import Masterdata from "../componen2/Masterdata";
 import Kelas from "../componen2/Kelas";
 import Sidnav from "./componen/Sidnav";
-import Presensi from "./Presensi/Presensi";
 import RekapPresensi from "./Presensi/RekapPresensi";
 import PresensiMasuk from "./Presensi/PresensiMasuk";
 import PresensiIzin from "./Presensi/PresensiIzin";
@@ -33,7 +32,6 @@ function App() {
       <Route path="/tambahdata" element={<Tambahdata />} />
       <Route path="/tambahkategori" element={<Tambahkategori />} />
       <Route path="/Kelas" element={<Kelas />} />
-      <Route path="/Presensi" element={<Presensi />} />
       <Route path="/RekapPresensi" element={<RekapPresensi />} />
       <Route path="/presensi-masuk" element={<PresensiMasuk />} />
       <Route path="/presensi-izin" element={<PresensiIzin />} />

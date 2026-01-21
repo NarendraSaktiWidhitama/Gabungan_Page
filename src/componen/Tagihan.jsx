@@ -3,34 +3,36 @@ import axios from "axios";
 import Sidnav from "./Sidnav";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { BASE_URL } from "../config/api";
 
 function Tagihan() {
   const [data, setData] = useState([]);
   const [jenis, setJenis] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
+
   const navigate = useNavigate();
+
+  const isLunas = (d) => d.status === "LUNAS";
 
   const fetchData = async (filterJenis = "") => {
     if (!loading) setLoading(true);
+
     try {
       if (!showContent) {
         await new Promise((resolve) => setTimeout(resolve, 500));
       }
 
-      const dataUrl = filterJenis
-        ? `http://localhost:5000/data?jenis=${encodeURIComponent(filterJenis)}`
-        : "http://localhost:5000/data";
+      const res = await axios.get(`${BASE_URL}/keuangan`);
+      let result = res.data;
 
-      const [r1, r2] = await Promise.all([
-        axios.get(dataUrl),
-        axios.get("http://localhost:5000/jenis"),
-      ]);
+      if (filterJenis) {
+        result = result.filter(
+          (d) => d.jenisTagihan?.nama === filterJenis
+        );
+      }
 
-      const reversedData = [...r1.data].reverse();
-
-      setData(reversedData);
-      setJenis(r2.data);
+      setData(result.reverse());
     } catch (err) {
       console.error(err);
     } finally {
@@ -44,46 +46,38 @@ function Tagihan() {
   }, []);
 
   const handleFilterChange = (e) => {
-    const val = e.target.value;
-    fetchData(val);
+    fetchData(e.target.value);
   };
 
   const handleToggleStatus = async (item) => {
-    const newStatus = !item.status;
+    const newStatus = item.status === "LUNAS" ? "BELUM LUNAS" : "LUNAS";
+
     const result = await Swal.fire({
       title: "Yakin ingin ubah status?",
-      text: newStatus
-        ? "Status akan diubah menjadi Lunas."
-        : "Status akan diubah menjadi Belum Lunas.",
+      text: `Status akan diubah menjadi ${newStatus}`,
       icon: "question",
       showCancelButton: true,
-      confirmButtonText: "Ya, ubah!",
-      cancelButtonText: "Batal",
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
     });
 
     if (result.isConfirmed) {
       try {
-        await axios.patch(`http://localhost:5000/data/${item.id}`, {
+        await axios.put(`${BASE_URL}/keuangan/${item.id}`, {
+          ...item,
           status: newStatus,
         });
 
-        setData((prev) =>
-          prev.map((d) => (d.id === item.id ? { ...d, status: newStatus } : d))
-        );
 
-        Swal.fire({
-          title: "Berhasil!",
-          text: newStatus
-            ? "Selamat Tagihan telah dilunasi!"
-            : "Tagihan dikembalikan menjadi belum lunas.",
+        await Swal.fire({
           icon: "success",
+          title: "Berhasil",
+          text: `Status berhasil diubah menjadi ${newStatus}`,
+          timer: 1200,
           showConfirmButton: false,
-          timer: 1500,
         });
+
+        fetchData();
       } catch (err) {
-        Swal.fire("Error!", "Terjadi kesalahan saat mengubah status.", "error");
+        Swal.fire("Error", "Gagal mengubah status", "error");
       }
     }
   };
@@ -94,30 +88,11 @@ function Tagihan() {
       text: "Data yang sudah dihapus tidak bisa dikembalikan!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#e74c3c",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Ya, hapus!",
-      cancelButtonText: "Batal",
     });
 
     if (result.isConfirmed) {
-      try {
-        await axios.delete(`http://localhost:5000/data/${d.id}`);
-        setData((prev) => prev.filter((x) => x.id !== d.id));
-        Swal.fire({
-          icon: "success",
-          title: "Terhapus!",
-          text: "Data berhasil dihapus.",
-          showConfirmButton: false,
-          timer: 1200,
-        });
-      } catch {
-        Swal.fire({
-          icon: "error",
-          title: "Gagal!",
-          text: "Terjadi kesalahan saat menghapus data.",
-        });
-      }
+      await axios.delete(`${BASE_URL}/keuangan/${d.id}`);
+      fetchData();
     }
   };
 
@@ -177,6 +152,7 @@ function Tagihan() {
         <div className="bg-white p-5 rounded-lg shadow-xl overflow-hidden">
           <div className="w-full overflow-x-auto md:overflow-x-hidden">
             <table className="w-full text-[15px] border-collapse table-fixed">
+              {/* ===== HEADER TABEL (INI YANG TADI HILANG) ===== */}
               <thead className="bg-gradient-to-r from-emerald-300 to-emerald-300">
                 <tr>
                   <th className="py-2 px-3 w-[40px]">No</th>
@@ -189,45 +165,33 @@ function Tagihan() {
                   <th className="py-2 px-3 w-[150px]">Aksi</th>
                 </tr>
               </thead>
+
               <tbody>
                 {data.map((d, i) => (
                   <tr
                     key={d.id}
-                    className={`${d.status ? "bg-green-50" : "hover:bg-gray-50"}`}
+                    className={isLunas(d) ? "bg-green-50" : "hover:bg-gray-50"}
                   >
                     <td className="py-2 px-3 text-right">{i + 1}</td>
-                    <td
-                      className="py-2 px-3 truncate max-w-[150px]"
-                      title={d.nama}
-                    >
-                      {d.nama}
-                    </td>
-                    <td
-                      className="py-2 px-3 truncate max-w-[180px]"
-                      title={d.email}
-                    >
-                      {d.email}
-                    </td>
-                    <td
-                      className="py-2 px-3 text-center truncate max-w-[120px]"
-                      title={d.jenis}
-                    >
-                      {d.jenis}
-                    </td>
-                    <td className="py-2 px-3 text-right text-nowrap">
+                    <td className="py-2 px-3 truncate">{d.nama}</td>
+                    <td className="py-2 px-3 truncate">{d.email}</td>
+                    <td className="py-2 px-3 text-center">
+                      {d.jenisTagihan?.nama || "-"}
+                      </td>
+                    <td className="py-2 px-3 text-right">
                       Rp {d.jumlah?.toLocaleString()}
                     </td>
-                    <td className="py-2 px-3 text-center text-nowrap">
+                    <td className="py-2 px-3 text-center">
                       {d.tanggal
                         ? new Date(d.tanggal).toLocaleDateString("id-ID")
                         : "-"}
                     </td>
                     <td
-                      className={`py-2 px-3 text-center font-semibold text-nowrap ${
-                        d.status ? "text-green-600" : "text-red-500"
+                      className={`py-2 px-3 text-center font-semibold ${
+                        isLunas(d) ? "text-green-600" : "text-red-500"
                       }`}
                     >
-                      {d.status ? "Lunas" : "Belum Lunas"}
+                      {isLunas(d) ? "Lunas" : "Belum Lunas"}
                     </td>
                     <td className="py-2 px-3 flex justify-center gap-1">
                       <button
@@ -244,13 +208,14 @@ function Tagihan() {
                       </button>
                       <button
                         onClick={() => handleToggleStatus(d)}
-                        className="bg-green-500 hover:bg-green-600 text-white text-sm px-3 py-1 rounded transition text-nowrap"
+                        className="bg-green-500 hover:bg-green-600 text-white text-sm px-3 py-1 rounded transition"
                       >
                         Ubah data
                       </button>
                     </td>
                   </tr>
                 ))}
+
                 {data.length === 0 && (
                   <tr>
                     <td colSpan="8" className="p-6 text-gray-500 text-center">

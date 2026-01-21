@@ -83,9 +83,6 @@ const Sidnav = () => {
           <p className="text-xs font-bold text-gray-700 mb-1 px-2 uppercase">
             Presensi
           </p>
-          <Link to="/Presensi" className={linkClass("/Presensi")}>
-            <i className="ri-price-tag-3-fill"></i> Presensi
-          </Link>
           <Link to="/RekapPresensi" className={linkClass("/RekapPresensi")}>
             <i className="ri-file-list-3-fill"></i> Rekap presensi
           </Link>

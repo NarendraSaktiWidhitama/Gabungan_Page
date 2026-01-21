@@ -23,13 +23,101 @@
   ],
   "data": [
     {
-      "id": "9b9a",
+      "id": "02f9",
       "nama": "Narendra sakti widhitama",
       "email": "yurawa@gmail.com",
       "jenis": "SPP Bulanan",
       "jumlah": 250000,
-      "tanggal": "05-12-2025",
+      "tanggal": "2025-12-17",
       "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "04fb",
+      "nama": "Adrean syahputra",
+      "email": "rean@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-12-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "3986",
+      "nama": "Darren sefhiros jacobson",
+      "email": "seft@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-12-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "55f8",
+      "nama": "mia luna tearmoon",
+      "email": "luna@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-12-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "ce37",
+      "nama": "Zyne del rey",
+      "email": "zynerey@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-12-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "d703",
+      "nama": "Arif riansyah",
+      "email": "arif@gmail.com",
+      "jenis": "SPP Bulanan",
+      "jumlah": 250000,
+      "tanggal": "2025-12-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "0eb1",
+      "nama": "Adrean syahputra",
+      "email": "rean@gmail.com",
+      "jenis": "Seragam Sekolah",
+      "jumlah": 1200000,
+      "tanggal": "2025-12-17",
+      "status": false,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "af08",
+      "nama": "Narendra sakti widhitama",
+      "email": "yurawa@gmail.com",
+      "jenis": "Seragam Sekolah",
+      "jumlah": 1500000,
+      "tanggal": "2025-12-17",
+      "status": true,
+      "level": "",
+      "kelas": ""
+    },
+    {
+      "id": "63fa",
+      "nama": "Darren sefhiros jacobson",
+      "email": "seft@gmail.com",
+      "jenis": "Uang Ujian",
+      "jumlah": 10000,
+      "tanggal": "2026-11-23",
+      "status": false,
       "level": "",
       "kelas": ""
     }
@@ -64,6 +152,12 @@
       "keterangan": "Untuk praktek jurusan",
       "id": "fab7",
       "aktif": true
+    },
+    {
+      "id": "0604",
+      "nama": "uang gedung",
+      "keterangan": "pembayaran uang gedung",
+      "aktif": true
     }
   ],
   "kategori": [
@@ -84,60 +178,108 @@
   ],
   "masterdata": [
     {
-      "id": "11ec",
-      "nama": "Adrean syahputra",
-      "email": "rean@gmail.com",
-      "kategori": "Siswa",
-      "jabatan": "X TKJ",
-      "rfid": "8167801850"
-    },
-    {
-      "id": "22ae",
+      "id": "ec60",
       "nama": "Narendra sakti widhitama",
       "email": "yurawa@gmail.com",
       "kategori": "Siswa",
       "jabatan": "X DKV",
-      "rfid": "2069745276"
+      "rfid": "8881383848"
     },
     {
-      "id": "c9ca",
+      "id": "31b5",
+      "nama": "Adrean syahputra",
+      "email": "rean@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X DKV",
+      "rfid": "2201877832"
+    },
+    {
+      "id": "4852",
       "nama": "Darren sefhiros jacobson",
       "email": "seft@gmail.com",
       "kategori": "Siswa",
-      "jabatan": "X TKJ",
-      "rfid": "7991784488"
+      "jabatan": "X RPL",
+      "rfid": "0237342205"
     },
     {
-      "id": "ed02",
-      "nama": "Bibir gajah",
-      "email": "asaasa@gmail.com",
-      "kategori": "Guru",
-      "jabatan": "Guru informatika",
-      "rfid": "1862592342"
-    },
-    {
-      "id": "06da",
+      "id": "932b",
       "nama": "supatman saputra",
       "email": "putra@gmail.com",
       "kategori": "Karyawan",
-      "jabatan": "security",
-      "rfid": "9680626418"
+      "jabatan": "Imam sholat jamaah",
+      "rfid": "7739843924"
     },
     {
-      "id": "741a",
-      "nama": "Tino shade",
-      "email": "Tino@gmail.com",
-      "kategori": "Guru",
-      "jabatan": "Guru informatika",
-      "rfid": "4061082560"
-    },
-    {
-      "id": "3991",
+      "id": "1eaf",
       "nama": "mia luna tearmoon",
       "email": "luna@gmail.com",
       "kategori": "Siswa",
       "jabatan": "X RPL",
-      "rfid": "3676166415"
+      "rfid": "5243543495"
+    },
+    {
+      "id": "b191",
+      "nama": "Bibir gajah",
+      "email": "gajah@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru informatika",
+      "rfid": "9068774622"
+    },
+    {
+      "id": "3af5",
+      "nama": "Zyne del rey",
+      "email": "zynerey@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X TKJ",
+      "rfid": "4334634644"
+    },
+    {
+      "id": "f9c2",
+      "nama": "Tino shade",
+      "email": "Tino@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru informatika",
+      "rfid": "7583673474"
+    },
+    {
+      "id": "f062",
+      "nama": "Tobii origami",
+      "email": "Tobii@gmail.com",
+      "kategori": "Guru",
+      "jabatan": "Guru informatika",
+      "rfid": "8473848503"
+    },
+    {
+      "id": "bdcc",
+      "nama": "faza top tegar",
+      "email": "asaasa@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "security",
+      "rfid": "4238405078"
+    },
+    {
+      "id": "ea8a",
+      "nama": "Raja malaya",
+      "email": "malaya@gmail.com",
+      "kategori": "Karyawan",
+      "jabatan": "security",
+      "rfid": "8278848995"
+    },
+    {
+      "id": "f361",
+      "nama": "Arif riansyah",
+      "email": "arif@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "X AKL",
+      "rfid": "2553534652"
+    },
+    {
+      "id": "42ae",
+      "nama": "mia luna tear",
+      "email": "yurawa@gmail.com",
+      "kategori": "Siswa",
+      "jabatan": "XII DKV",
+      "rfid": "12345678"
     }
   ],
   "kelas": [
@@ -200,18 +342,23 @@
       "id": "80bd",
       "kelas": "XII",
       "jurusan": "RPL"
+    },
+    {
+      "kelas": "XII",
+      "jurusan": "AKL",
+      "id": "b840"
     }
   ],
   "presensi": [
     {
-      "id": "15de",
-      "nama": "mia luna tearmoon",
+      "id": "6106",
+      "nama": "Adrean syahputra",
       "kategori": "Siswa",
-      "rfid": "3676166415",
-      "tanggal": "9/12/2025",
-      "jam_masuk": "07.53.41",
-      "jam_pulang": "-",
-      "status": "hadir",
+      "rfid": "2201877832",
+      "tanggal": "13/1/2026",
+      "jam_masuk": "09.07.29",
+      "jam_pulang": "14.08.17",
+      "status": "izin",
       "keterangan": "-"
     }
   ]

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../assets/Logo.png"
 import myvideo from "../assets/Zz.mp4";
+import { BASE_URL } from "../config/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -15,36 +16,34 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.get("http://localhost:5000/users", {
-        params: { username: form.username, password: form.password },
-      });
+  e.preventDefault();
 
-      if (res.data.length > 0) {
-        await Swal.fire({
-          icon: "success",
-          title: "Berhasil login",
-          showConfirmButton: false,
-          timer: 1200,
-        });
-        navigate("/dashboard");
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Gagal",
-          text: "Username / password salah",
-        });
+  try {
+    const res = await axios.post(
+      `${BASE_URL}/api/auth/login`,
+      {
+        username: form.username,
+        password: form.password,
       }
-    } catch (err) {
-      console.error(err);
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Terjadi kesalahan server",
-      });
-    }
-  };
+    );
+
+    await Swal.fire({
+      icon: "success",
+      title: res.data,
+      timer: 1200,
+      showConfirmButton: false,
+    });
+
+    navigate("/dashboard");
+
+  } catch (err) {
+    Swal.fire({
+      icon: "error",
+      title: "Login gagal",
+      text: err.response?.data || "Username / password salah",
+    });
+  }
+};
 
   return (
     <div className="relative flex items-center justify-center h-screen overflow-hidden">

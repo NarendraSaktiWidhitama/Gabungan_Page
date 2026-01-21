@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "../assets/Logo.png"
 import myvideo from "../assets/Zz.mp4";
+import { BASE_URL } from "../config/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -15,25 +16,39 @@ function Register() {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleRegister = async (e) => {
-    e.preventDefault();
-    if (form.password !== form.confirm) {
-      Swal.fire({ icon: "error", title: "Password tidak cocok" });
-      return;
-    }
-    try {
-      const check = await axios.get("http://localhost:5000/users", { params: { username: form.username } });
-      if (check.data.length > 0) {
-        Swal.fire({ icon: "error", title: "Username sudah dipakai" });
-        return;
+  e.preventDefault();
+
+  if (form.password !== form.confirm) {
+    Swal.fire({ icon: "error", title: "Password tidak cocok" });
+    return;
+  }
+
+  try {
+    const res = await axios.post(
+      `${BASE_URL}/api/auth/register`,
+      {
+        username: form.username,
+        password: form.password,
       }
-      await axios.post("http://localhost:5000/users", { username: form.username, password: form.password });
-      Swal.fire({ icon: "success", title: "Berhasil daftar", timer: 1200, showConfirmButton: false });
-      navigate("/");
-    } catch (err) {
-      console.error(err);
-      Swal.fire({ icon: "error", title: "Error", text: "Gagal mendaftar" });
-    }
-  };
+    );
+
+    Swal.fire({
+      icon: "success",
+      title: res.data,
+      timer: 1200,
+      showConfirmButton: false,
+    });
+
+    navigate("/");
+
+  } catch (err) {
+    Swal.fire({
+      icon: "error",
+      title: "Register gagal",
+      text: err.response?.data || "Terjadi kesalahan",
+    });
+  }
+};
 
   return (
     <div className="flex items-center justify-center h-screen relative">
